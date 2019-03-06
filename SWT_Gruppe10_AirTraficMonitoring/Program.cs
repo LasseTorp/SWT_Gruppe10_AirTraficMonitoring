@@ -10,6 +10,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
     {
         static void Main(string[] args)
         {
+
         }
     }
 }
