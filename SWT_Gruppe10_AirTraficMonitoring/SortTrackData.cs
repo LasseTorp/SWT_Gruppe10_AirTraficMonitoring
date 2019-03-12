@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SWT_Gruppe10_AirTraficMonitoring
 {
-    interface ITransponderReciever
+    class SortTrackData
     {
     }
 }

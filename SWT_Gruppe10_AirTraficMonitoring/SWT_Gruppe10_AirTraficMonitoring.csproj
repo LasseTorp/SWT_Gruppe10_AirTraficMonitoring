@@ -46,9 +46,13 @@
     <Compile Include="CollisionStatus.cs" />
     <Compile Include="ICollisionStatus.cs" />
     <Compile Include="ITransponderReciever.cs" />
+    <Compile Include="DataContainer.cs" />
+    <Compile Include="ISortTrackData.cs" />
+    <Compile Include="DataCalculator.cs" />
+    <Compile Include="IDataCalculator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TransponderReciever.cs" />
+    <Compile Include="SortTrackData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
