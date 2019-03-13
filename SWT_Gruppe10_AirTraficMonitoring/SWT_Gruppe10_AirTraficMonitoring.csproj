@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollisionStatus.cs" />
-    <Compile Include="DataContainerDTO.cs" />
+    <Compile Include="FlightDataDTO.cs" />
     <Compile Include="ICollisionStatus.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="IPrint.cs" />

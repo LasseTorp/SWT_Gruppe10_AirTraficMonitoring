@@ -8,19 +8,50 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 {
     class DataCalculator : IDataCalculator
     {
-        public void calculate()
+        public List<FlightDataDTO> oldTrackData;
+        public List<FlightDataDTO> newTrackData;
+        public bool firstTime { set; get; }
+        
+
+        public DataCalculator(ISortTrackData sortTrackData)
         {
-            throw new NotImplementedException();
+            firstTime = true;
+            sortTrackData.SortDataEvent += calculate;
         }
 
-        public void CalculateVelocity()
+        public event EventHandler<AirTrafficEvent> DataCalculatedEvent;
+
+        public void calculate(object sender, AirTrafficEvent e)
         {
-            throw new NotImplementedException();
+            newTrackData = new List<FlightDataDTO>();
+            newTrackData = e.AirTrafficList;
+
+            if (firstTime == false)
+            {
+                foreach (var Flight in newTrackData)
+                {
+                    CalculateVelocity(Flight);
+                    calculateCourse(Flight);
+                }
+            }
+
+            oldTrackData = newTrackData;
+            firstTime = false;
+
+            AirTrafficEvent airTrafficEvent = new AirTrafficEvent();
+            airTrafficEvent.AirTrafficList = newTrackData;
+            DataCalculatedEvent?.Invoke(this, airTrafficEvent);
+            
         }
 
-        public void calculateCourse()
+        public void CalculateVelocity(FlightDataDTO flight)
         {
-            throw new NotImplementedException();
+            
+        }
+
+        public void calculateCourse(FlightDataDTO flight)
+        {
+            
         }
     }
 }

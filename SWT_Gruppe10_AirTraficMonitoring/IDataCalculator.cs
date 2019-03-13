@@ -8,8 +8,9 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 {
     interface IDataCalculator
     {
-        void calculate();
-        void CalculateVelocity();
-        void calculateCourse();
+        event EventHandler<AirTrafficEvent> DataCalculatedEvent;
+        void calculate(object sender, AirTrafficEvent e);
+        void CalculateVelocity(FlightDataDTO flight);
+        void calculateCourse(FlightDataDTO flight);
     }
 }
