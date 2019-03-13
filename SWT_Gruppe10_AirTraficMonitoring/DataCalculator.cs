@@ -8,7 +8,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 {
     class DataCalculator : IDataCalculator
     {
-        public List<FlightDataDTO> oldTrackData;
+        public List<FlightDataDTO> oldTrackData { set; get; }
         public List<FlightDataDTO> newTrackData;
         public bool firstTime { set; get; }
         
@@ -51,7 +51,39 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
         public void calculateCourse(FlightDataDTO flight)
         {
-            
+            foreach (var oldFlight in oldTrackData)
+            {
+                if (oldFlight.Tag == flight.Tag)
+                {
+                    int x1 = oldFlight.XCor;
+                    int x2 = flight.XCor;
+                    int y1 = oldFlight.YCor;
+                    int y2 = flight.YCor;
+
+                    if (x1 == x2)
+                    {
+                        flight.Course = 0;
+                    }
+                    else
+                    {
+                        int course;
+
+                        course = Convert.ToInt32((180 / Math.PI) * Math.Atan((x2 - x1) / (y2 - y1)));
+
+                        if (course < 0)
+                        {
+                            course = course + 360;
+                            flight.Course = course;
+                        }
+                        else
+                        {
+                            flight.Course = course;
+                        }
+
+                    }
+                }
+            }
+
         }
     }
 }
