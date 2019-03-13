@@ -8,9 +8,15 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 {
     class DataCalculator : IDataCalculator
     {
+
+        public DataCalculator(ISortTrackData sortTrackData)
+        {
+            sortTrackData.EVENT += calculate();
+        }
+
         public void calculate()
         {
-            throw new NotImplementedException();
+            
         }
 
         public void CalculateVelocity()
