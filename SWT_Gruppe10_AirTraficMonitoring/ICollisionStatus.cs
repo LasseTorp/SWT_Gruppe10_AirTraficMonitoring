@@ -9,8 +9,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 {
     interface ICollisionStatus
     {
-        void RaiseEvent();
-        void RecieveData();
+        void RecieveData(object sender, AirTrafficEvent airTrafficEvent);
         void DetectCollision();
         void ShowData(); 
     }
