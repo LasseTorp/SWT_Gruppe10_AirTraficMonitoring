@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SWT_Gruppe10_AirTraficMonitoring
 {
-    class DataCalculator : IDataCalculator
+    public class DataCalculator : IDataCalculator
     {
         public List<FlightDataDTO> oldTrackData { set; get; }
         public List<FlightDataDTO> newTrackData;
