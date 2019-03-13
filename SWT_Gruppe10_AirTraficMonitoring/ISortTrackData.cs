@@ -9,7 +9,10 @@ namespace SWT_Gruppe10_AirTraficMonitoring
     public interface ISortTrackData
     {
 
-        
+        event EventHandler<AirTrafficEvent> SortDataEvent;
+        void SortData();
+
+
 
     }
 }
