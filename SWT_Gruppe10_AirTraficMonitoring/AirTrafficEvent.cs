@@ -7,7 +7,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
     public class AirTrafficEvent : EventArgs
     {
 
-        public List<DataContainerDTO> AirTrafficList { get; set; }
+        public List<FlightDataDTO> AirTrafficList { get; set; }
 
     }
 }

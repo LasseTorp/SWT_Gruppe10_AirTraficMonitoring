@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SWT_Gruppe10_AirTraficMonitoring
 {
-    public class DataContainerDTO
+    public class FlightDataDTO
     {
 
         public string Tag { get; set; }
