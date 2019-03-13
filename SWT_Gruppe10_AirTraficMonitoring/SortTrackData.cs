@@ -10,7 +10,11 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 {
     class SortTrackData : ISortTrackData
     {
-        
+
+        // lige nu står en liste af fligtdata til at være lig med et event , men det er også forkert. 
+        public List<FlightDataDTO> data { get; set; }
+
+
         // Vores DLL skal ligges ind i vores github repository, eller hvad det nu hedder. 
         // Har bare lavet en reference til den lokalt, ved ikke om i får det med ved push/commit 
 
@@ -28,7 +32,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
         private void RecieverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
             //et eller andet skal være lige med        e.Transponderdata
-            
+            data = e.TransponderData;
         }
 
 
@@ -44,10 +48,11 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
         public void SortData()
         {
-            if ()
-            {
-                
-            }
+            // i denne klasse skal de forskellige pladser i den string der kommer ind vel deles ud i vores fligtDataDTO 
         }
+
+
+
+        // ud fra slide 3 skal der vel også en metode til at invoke vores SortDataEvent 
     }
 }
