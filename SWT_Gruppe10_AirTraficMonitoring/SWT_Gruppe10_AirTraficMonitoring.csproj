@@ -44,9 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollisionStatus.cs" />
+    <Compile Include="DataContainerDTO.cs" />
     <Compile Include="ICollisionStatus.cs" />
     <Compile Include="ITransponderReciever.cs" />
-    <Compile Include="DataContainer.cs" />
+    <Compile Include="AirTrafficEvent.cs" />
     <Compile Include="ISortTrackData.cs" />
     <Compile Include="DataCalculator.cs" />
     <Compile Include="IDataCalculator.cs" />
