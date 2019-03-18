@@ -34,5 +34,17 @@ namespace AirTrafficMonitoring_Test_unit
             Assert.That(flight.Course, Is.EqualTo(45));
         }
 
+        [Test]
+        public void calculateVelocity_Start6000and6000End12000and12000Time30Sec_282meterprsecond()
+        {
+            UUT_.oldTrackData.Add(new FlightDataDTO("BTU423", 6000, 6000, 7000, new DateTime(2019, 4, 17, 13, 30, 10), 0, 0, ""));
+            FlightDataDTO flight = new FlightDataDTO("ATR423", 12000, 12000, 7000,
+                new DateTime(2019, 4, 17, 14, 30, 40), 0, 0, "");
+
+            UUT_.CalculateVelocity(flight);
+
+            Assert.That(flight.Velocity, Is.EqualTo(282));
+        }
+
     }
 }
