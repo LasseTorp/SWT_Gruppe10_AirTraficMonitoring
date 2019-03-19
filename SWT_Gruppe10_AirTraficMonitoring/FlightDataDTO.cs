@@ -18,5 +18,18 @@ namespace SWT_Gruppe10_AirTraficMonitoring
         public int Course { get; set; }
         public string Collision { get; set; }
 
+        public FlightDataDTO(string tag, int xcor, int ycor, int altitude, DateTime timestamp, int velocity, int course,
+            string collision)
+        {
+            Tag = tag;
+            XCor = xcor;
+            YCor = ycor;
+            Altitude = altitude;
+            TimeStamp = timestamp;
+            Velocity = velocity;
+            Course = course;
+            Collision = collision;
+        }
+
     }
 }

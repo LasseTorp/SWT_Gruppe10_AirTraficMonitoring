@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SWT_Gruppe10_AirTraficMonitoring
 {
-    class DataCalculator : IDataCalculator
+    public class DataCalculator : IDataCalculator
     {
         public List<FlightDataDTO> oldTrackData { set; get; }
         public List<FlightDataDTO> newTrackData;
@@ -46,7 +46,27 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
         public void CalculateVelocity(FlightDataDTO flight)
         {
-            
+            foreach (var oldFlight in oldTrackData)
+            {
+                if (oldFlight.Tag == flight.Tag)
+                {
+                    int xOld = oldFlight.XCor;
+                    int yOld = oldFlight.YCor;
+                    int xNew = flight.XCor;
+                    int yNew = flight.YCor;
+
+                    //Udregner distancen flyet er fløjet
+                    double distance = Math.Sqrt(Math.Pow((xOld - xNew), 2) + Math.Pow((yOld - yNew), 2));
+
+                    // Udregn tiden det har taget
+
+                    double time = (flight.TimeStamp - oldFlight.TimeStamp).TotalSeconds;
+
+                    int velocity = Convert.ToInt32(distance / time);
+
+                    flight.Velocity = velocity;
+                }
+            }
         }
 
         public void calculateCourse(FlightDataDTO flight)

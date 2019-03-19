@@ -51,7 +51,6 @@
     <Compile Include="ICollisionStatus.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="IPrint.cs" />
-    <Compile Include="ITransponderReciever.cs" />
     <Compile Include="AirTrafficEvent.cs" />
     <Compile Include="ISortTrackData.cs" />
     <Compile Include="DataCalculator.cs" />
