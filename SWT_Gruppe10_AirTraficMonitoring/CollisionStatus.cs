@@ -12,6 +12,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
         private string aircraftsColliding_;
         private string aircraftsInAirspace; 
         private List<FlightDataDTO> aircraftList;
+        private List<string> aircraftscollidingStrings;
 
         private ILog log;
         private IPrint print; 
@@ -46,14 +47,19 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                         if (xDistance <= 500 || yDistance <= 5000|| c <= 5000)
                         {
                             collisionStatus_ = true;
-                            aircraftsColliding_ = aircraftList[i].Tag + " is within the collisionrange with " +
+                            aircraftsColliding_ = aircraftList[i].TimeStamp + aircraftList[i].Tag + " is within the collisionrange with " +
                                                   aircraftList[j].Tag;
-                            //mangler noget med string aircraftsinairspace
+                            aircraftscollidingStrings.Add(aircraftsColliding_);
+
                         }
                         else
                         {
                             collisionStatus_ = false;
-                            //mangler noget med string aircraftsinairspace
+
+                            foreach (var aircraft in aircraftList)
+                            {
+                                
+                            }
                         }
                     }
                     else
@@ -70,7 +76,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
         {
             if (collisionStatus_ == true)
             {
-                log.LogCollision(aircraftsColliding_);
+                log.LogCollision(aircraftscollidingStrings);
             }
             else
             {

@@ -8,7 +8,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 {
     class Log : ILog
     {
-        public void LogCollision(string aircraftsColliding)
+        public void LogCollision(List<string> aircraftsCollidingList)
         {
             //log aircraftscolliding til fil 
         }
