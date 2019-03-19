@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SWT_Gruppe10_AirTraficMonitoring
 {
-    interface IDataCalculator
+    public interface IDataCalculator
     {
         event EventHandler<AirTrafficEvent> DataCalculatedEvent;
         void calculate(object sender, AirTrafficEvent e);

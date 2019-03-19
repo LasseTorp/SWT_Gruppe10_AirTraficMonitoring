@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace SWT_Gruppe10_AirTraficMonitoring
 {
-    interface ICollisionStatus
+    public interface ICollisionStatus
     {
         void RecieveData(object sender, AirTrafficEvent airTrafficEvent);
-        void DetectCollision();
+        void DetectCollision(List<FlightDataDTO> aircraftList);
         void ShowData(); 
     }
 }
