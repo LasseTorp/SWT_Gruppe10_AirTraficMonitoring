@@ -51,24 +51,21 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
 
         public event EventHandler<AirTrafficEvent> SortDataEvent;
-        public List<FlightDataDTO> data { get; set; }
+        public List<FlightDataDTO> data = new List<FlightDataDTO>();
 
         public void SortData(object sender, RawTransponderDataEventArgs e)
         {
 
             string[] inputfields;
-            DateTime Timestamp = new DateTime();
-            
-
+           
             foreach (var flightData in e.TransponderData)
             {
                 inputfields = flightData.Split(';');
+                
+                data.Add(new FlightDataDTO(inputfields[0],Convert.ToInt32(inputfields[1]),Convert.ToInt32(inputfields[2]),
+                    Convert.ToInt32(inputfields[3]),DateTime.ParseExact(inputfields[4], "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture),0,0,""));
 
-                Timestamp = Convert.ToDateTime(inputfields[4]);
-
-                data.Add(new FlightDataDTO(inputfields[0],Convert.ToInt16(inputfields[1]),Convert.ToInt16(inputfields[2]),
-                    Convert.ToInt16(inputfields[3]),Timestamp,0,0,""));
-                Console.WriteLine(Timestamp);
+                //Console.WriteLine(DateTime.ParseExact(inputfields[4], "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
             }
             
             // måske
@@ -79,6 +76,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
             // i denne klasse skal de forskellige pladser i den string der kommer ind vel deles ud i vores fligtDataDTO 
         }
 
+        
 
 
         // ud fra slide 3 skal der vel også en metode til at invoke vores SortDataEvent 
