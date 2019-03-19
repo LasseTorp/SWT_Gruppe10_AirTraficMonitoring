@@ -31,11 +31,13 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
         private void RecieverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
+            // Dette blev gjort for at se om dataen kom ind og printet på konsollen 
+            // foreach (var c in e.TransponderData)
+            //{
+            //  Console.WriteLine(c);   
+            //}
 
-            foreach (var c in e.TransponderData)
-            {
-                Console.WriteLine(c);   
-            }   
+          
             //et eller andet skal være lige med        e.Transponderdata
             //data = e.TransponderData;
         }
