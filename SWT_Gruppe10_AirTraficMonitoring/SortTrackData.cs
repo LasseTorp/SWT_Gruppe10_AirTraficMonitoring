@@ -11,21 +11,12 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 {
     public class SortTrackData : ISortTrackData
     {
-
-        // lige nu står en liste af fligtdata til at være lig med et event , men det er også forkert. 
-        
-
-
-        // Vores DLL skal ligges ind i vores github repository, eller hvad det nu hedder. 
-        // Har bare lavet en reference til den lokalt, ved ikke om i får det med ved push/commit 
-
-
         //Dette skal til for at hooke sig til DLL
         private ITransponderReceiver reciever_;
 
         public SortTrackData(ITransponderReceiver reciever)//Her skal den hooke sig på DLL. interfacet i DLL
         {
-            //Dette er taget direkte fra kode eksemplet
+            
             reciever_ = reciever;
 
             //reciever_.TransponderDataReady += RecieverOnTransponderDataReady;
@@ -43,11 +34,6 @@ namespace SWT_Gruppe10_AirTraficMonitoring
             //  Console.WriteLine(c);   
             //}
         }
-
-
-        //Tror det kommende kode skal til for at lave denne klasse til source
-
-        //Ved ikke om denne linje skal bruges. Den står i event source slidet. 
 
 
         public event EventHandler<AirTrafficEvent> SortDataEvent;
@@ -72,13 +58,8 @@ namespace SWT_Gruppe10_AirTraficMonitoring
             AirTrafficEvent airTrafficEvent = new AirTrafficEvent();
             airTrafficEvent.AirTrafficList = data;
             SortDataEvent?.Invoke(this,airTrafficEvent);
-
-            // i denne klasse skal de forskellige pladser i den string der kommer ind vel deles ud i vores fligtDataDTO 
+            
         }
-
         
-
-
-        // ud fra slide 3 skal der vel også en metode til at invoke vores SortDataEvent 
     }
 }
