@@ -17,6 +17,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
         {
             firstTime = true;
             sortTrackData.SortDataEvent += calculate;
+            oldTrackData = new List<FlightDataDTO>();
         }
 
         public event EventHandler<AirTrafficEvent> DataCalculatedEvent;
@@ -54,11 +55,16 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                     int yOld = oldFlight.YCor;
                     int xNew = flight.XCor;
                     int yNew = flight.YCor;
+                    int highOld = oldFlight.Altitude;
+                    int highNew = flight.Altitude;
 
                     //Udregner distancen flyet er fløjet
-                    double distance = Math.Sqrt(Math.Pow((xOld - xNew), 2) + Math.Pow((yOld - yNew), 2));
+                    double distanceXY = Math.Sqrt(Math.Pow((xOld - xNew), 2) + Math.Pow((yOld - yNew), 2));
+                    double distanceAltitude = highOld - highNew;
 
-                    // Udregn tiden det har taget
+                    double distance = Math.Sqrt(Math.Pow(distanceXY, 2) + Math.Pow(distanceAltitude, 2));
+
+                    //Udregn tiden det har taget
 
                     double time = (flight.TimeStamp - oldFlight.TimeStamp).TotalSeconds;
 
@@ -79,6 +85,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                     int x2 = flight.XCor;
                     int y1 = oldFlight.YCor;
                     int y2 = flight.YCor;
+                    
 
                     if (x1 == x2)
                     {
