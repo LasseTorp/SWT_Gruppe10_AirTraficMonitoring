@@ -14,6 +14,7 @@ namespace AirTrafficMonitoring_Test_unit
     public class TransponderReceiverTest
     {
         private ITransponderReceiver fakeTransponderReceiver_;
+        private SortTrackData uut_;
 
         //HER MANGLER UUT
 
@@ -22,13 +23,14 @@ namespace AirTrafficMonitoring_Test_unit
         {
             //Laver fake Transponder Data Receiver
             fakeTransponderReceiver_ = Substitute.For<ITransponderReceiver>();
+            uut_ = new SortTrackData(fakeTransponderReceiver_);
             
         }
 
         [Test]
         public void TestReception()
         {
-
+            
         }
     }
 }

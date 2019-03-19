@@ -9,7 +9,7 @@ using TransponderReceiver;
 
 namespace SWT_Gruppe10_AirTraficMonitoring
 {
-    class SortTrackData : ISortTrackData
+    public class SortTrackData : ISortTrackData
     {
 
         // lige nu står en liste af fligtdata til at være lig med et event , men det er også forkert. 
