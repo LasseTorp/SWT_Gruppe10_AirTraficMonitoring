@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiver;
@@ -8,58 +9,57 @@ using TransponderReceiver;
 
 namespace SWT_Gruppe10_AirTraficMonitoring
 {
-    class SortTrackData : ISortTrackData
+    public class SortTrackData : ISortTrackData
     {
-
-        // lige nu står en liste af fligtdata til at være lig med et event , men det er også forkert. 
-        public List<FlightDataDTO> data { get; set; }
-
-
-        // Vores DLL skal ligges ind i vores github repository, eller hvad det nu hedder. 
-        // Har bare lavet en reference til den lokalt, ved ikke om i får det med ved push/commit 
-
-
         //Dette skal til for at hooke sig til DLL
         private ITransponderReceiver reciever_;
 
         public SortTrackData(ITransponderReceiver reciever)//Her skal den hooke sig på DLL. interfacet i DLL
         {
-            //Dette er taget direkte fra kode eksemplet
+            
             reciever_ = reciever;
-            reciever_.TransponderDataReady += RecieverOnTransponderDataReady; 
+
+            //reciever_.TransponderDataReady += RecieverOnTransponderDataReady;
+            reciever_.TransponderDataReady += SortData;
         }
 
+
+        // Klassen blev tilføjet for at se om der kunne printes fra dll filen. 
         private void RecieverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         {
             // Dette blev gjort for at se om dataen kom ind og printet på konsollen 
+           
             // foreach (var c in e.TransponderData)
             //{
             //  Console.WriteLine(c);   
             //}
-
-          
-            //et eller andet skal være lige med        e.Transponderdata
-            //data = e.TransponderData;
         }
 
 
-
-
-
-
-        //Tror det kommende kode skal til for at lave denne klasse til source
-
-        //Ved ikke om denne linje skal bruges. Den står i event source slidet. 
         public event EventHandler<AirTrafficEvent> SortDataEvent;
+        public List<FlightDataDTO> data = new List<FlightDataDTO>();
 
-
-        public void SortData()
+        public void SortData(object sender, RawTransponderDataEventArgs e)
         {
-            // i denne klasse skal de forskellige pladser i den string der kommer ind vel deles ud i vores fligtDataDTO 
+
+            string[] inputfields;
+           
+            foreach (var flightData in e.TransponderData)
+            {
+                inputfields = flightData.Split(';');
+                
+                data.Add(new FlightDataDTO(inputfields[0],Convert.ToInt32(inputfields[1]),Convert.ToInt32(inputfields[2]),
+                    Convert.ToInt32(inputfields[3]),DateTime.ParseExact(inputfields[4], "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture),0,0,""));
+
+                //Console.WriteLine(DateTime.ParseExact(inputfields[4], "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
+            }
+            
+            // måske
+            AirTrafficEvent airTrafficEvent = new AirTrafficEvent();
+            airTrafficEvent.AirTrafficList = data;
+            SortDataEvent?.Invoke(this,airTrafficEvent);
+            
         }
-
-
-
-        // ud fra slide 3 skal der vel også en metode til at invoke vores SortDataEvent 
+        
     }
 }

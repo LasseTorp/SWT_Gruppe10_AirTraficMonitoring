@@ -8,6 +8,6 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 {
     interface ILog
     {
-        void LogCollision(string aircraftsColliding);
+        void LogCollision(List<string> aircraftsCollidingList);
     }
 }

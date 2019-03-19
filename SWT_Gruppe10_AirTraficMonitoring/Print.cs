@@ -8,9 +8,12 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 {
     class Print : IPrint
     {
-        public void PrintAircraftInfo(string aircraftsInAirspaceInfo)
+        public void PrintAircraftInfo(List<string> aircraftsInAirspaceList)
         {
-            Console.WriteLine(aircraftsInAirspaceInfo);
+            foreach (var aircraftsInAirspace in aircraftsInAirspaceList)
+            {
+                Console.WriteLine(aircraftsInAirspace);
+            }
         }
 
     }

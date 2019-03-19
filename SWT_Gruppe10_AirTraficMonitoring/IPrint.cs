@@ -8,6 +8,6 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 {
     interface IPrint
     {
-        void PrintAircraftInfo(string aircraftInfo); 
+        void PrintAircraftInfo(List<string> aircraftInAirspaceList); 
     }
 }
