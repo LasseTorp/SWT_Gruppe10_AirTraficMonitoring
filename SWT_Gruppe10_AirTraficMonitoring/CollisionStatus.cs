@@ -18,7 +18,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
         public CollisionStatus(IDataCalculator iDataCalculator)
         {
-            iDataCalculator.DataCalculatedEvent += DetectCollision; 
+            iDataCalculator.DataCalculatedEvent += RecieveData;
         }
 
         public void RecieveData(object sender, AirTrafficEvent airTrafficEvent)
