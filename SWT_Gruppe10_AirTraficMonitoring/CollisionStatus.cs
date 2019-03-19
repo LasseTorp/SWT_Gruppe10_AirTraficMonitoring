@@ -11,7 +11,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
         public bool collisionStatus_ { get; set; }
         private string aircraftsColliding_;
         private string aircraftInAirspace_; 
-        private List<string> aircraftsInAirspaceList; 
+        private List<string> aircraftsInAirspaceList;
         private List<FlightDataDTO> aircraftList;
         private List<string> aircraftscollidingStrings;
 
@@ -65,7 +65,10 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                     else
                     {
                         collisionStatus_ = false;
-                        //mangler noget med string aircraftsinairspace
+                        aircraftInAirspace_ = "Aircrafttag: " + aircraftList_[i].Tag + "" + aircraftList_[i].Altitude + "" + aircraftList_[i].XCor +
+                                              "" + aircraftList_[i].YCor + "" + aircraftList_[i].Course + "" +
+                                              aircraftList_[i].Velocity;
+                        aircraftsInAirspaceList.Add(aircraftInAirspace_);
                     }
                 }
             }

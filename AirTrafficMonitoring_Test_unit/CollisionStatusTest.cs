@@ -28,6 +28,8 @@ namespace AirTrafficMonitoring_Test_unit
             List<FlightDataDTO> TrackData = new List<FlightDataDTO>(); 
             FlightDataDTO flight1 = new FlightDataDTO("ATR423", 11000, 10500, 7000, new DateTime(2019, 4, 17, 14, 30, 40), 0, 0, "");
             FlightDataDTO flight2 = new FlightDataDTO("ATB675", 11500, 11500, 7000, new DateTime(2019, 4, 17, 14, 30, 40), 0, 0, "");
+            TrackData.Add(flight1);
+            TrackData.Add(flight2);
 
             UUT_.DetectCollision(TrackData);
 
