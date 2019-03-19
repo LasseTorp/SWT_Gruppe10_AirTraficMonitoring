@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,8 @@ namespace SWT_Gruppe10_AirTraficMonitoring
     {
         public void LogCollision(string aircraftsColliding)
         {
+            StreamWriter sw = new StreamWriter("Collision.txt");
+            sw.Write(aircraftsColliding);
             //log aircraftscolliding til fil 
         }
     }
