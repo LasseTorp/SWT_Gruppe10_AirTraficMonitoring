@@ -8,18 +8,17 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 {
     class CollisionStatus : ICollisionStatus
     {
-
         private bool collisionStatus_;
         private string aircraftsColliding_;
         private string aircraftsInAirspace; 
-        private List<DataContainerDTO> aircraftList;
+        private List<FlightDataDTO> aircraftList;
 
         private ILog log;
         private IPrint print; 
 
         public CollisionStatus(IDataCalculator iDataCalculator)
         {
-            iDataCalculator.DataCalculatedEvent += DetectCollision; 
+            iDataCalculator.DataCalculatedEvent += RecieveData;
         }
 
         public void RecieveData(object sender, AirTrafficEvent airTrafficEvent)
