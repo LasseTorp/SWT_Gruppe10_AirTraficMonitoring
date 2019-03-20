@@ -20,6 +20,7 @@ namespace AirTrafficMonitoring_Test_unit
         {
             fakeDataCalculator = Substitute.For<IDataCalculator>(); 
             UUT_ = new CollisionStatus(fakeDataCalculator);
+            UUT_.collisionStatus_ = false; 
         }
 
         [TestCase(10000, 11000, 7000, 18000, 11000, 7000, false)]
