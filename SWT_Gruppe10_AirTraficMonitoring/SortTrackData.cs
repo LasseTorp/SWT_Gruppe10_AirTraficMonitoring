@@ -16,7 +16,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
         public SortTrackData(ITransponderReceiver reciever)//Her skal den hooke sig på DLL. interfacet i DLL
         {
-            
+            DataRecieved_ = new List<string>();
             reciever_ = reciever;
 
             //reciever_.TransponderDataReady += RecieverOnTransponderDataReady;
@@ -25,22 +25,25 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
 
         // Klassen blev tilføjet for at se om der kunne printes fra dll filen. 
-        private void RecieverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
-        {
+        //private void RecieverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
+        //{
             // Dette blev gjort for at se om dataen kom ind og printet på konsollen 
            
             // foreach (var c in e.TransponderData)
             //{
             //  Console.WriteLine(c);   
             //}
-        }
+        //}
 
 
         public event EventHandler<AirTrafficEvent> SortDataEvent;
         public List<FlightDataDTO> data = new List<FlightDataDTO>();
+        public List<string> DataRecieved_ { set; get; }
 
         public void SortData(object sender, RawTransponderDataEventArgs e)
         {
+            
+            DataRecieved_ = e.TransponderData;
 
             string[] inputfields;
            
