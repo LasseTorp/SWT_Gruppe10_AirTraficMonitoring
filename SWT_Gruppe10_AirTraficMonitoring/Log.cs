@@ -9,13 +9,25 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 {
     public class Log : ILog
     {
-        public void LogCollision(List<string> aircraftsCollidingList)
-        {
-            StreamWriter sw = new StreamWriter("Collision.txt");
-            sw.WriteLine(aircraftsCollidingList);
-            //log aircraftscolliding til fil 
-            
-        }
+        private List<CollidingFlightsDTO> previousLoggedFlights = new List<CollidingFlightsDTO>();
 
+        public void LogCollision(List<CollidingFlightsDTO> aircraftsCollidingList)
+        {
+            for (int i = 0; i < aircraftsCollidingList.Count; i++)
+            {
+                if (!previousLoggedFlights.Contains(aircraftsCollidingList[i]))
+                {
+                    FileStream output =
+                        new FileStream("CollidingAircrafts.txt", FileMode.OpenOrCreate, FileAccess.Write);
+
+                    StreamWriter fileWriter = new StreamWriter(output);
+
+                    fileWriter.WriteLine(aircraftsCollidingList[i].collidingAircraftsString);
+
+                    Console.WriteLine("^ÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅ");
+                    fileWriter.Close();
+                }
+            }
+        }
     }
 }
