@@ -40,12 +40,12 @@ namespace SWT_Gruppe10_AirTraficMonitoring
             {
                 for (int j = i+1; j < aircraftList_.Count ; j++)
                 {
-                    if (aircraftList_[i].Altitude - aircraftList_[j].Altitude <= 300 && aircraftList_[i].Altitude - aircraftList_[j].Altitude >= -300)
+                    if (Math.Abs(aircraftList_[i].Altitude - aircraftList_[j].Altitude) <= 300)
                     {
-                        double xDistance = (aircraftList_[i].XCor - aircraftList_[j].XCor);
+                        double xDistance = (Math.Abs(aircraftList_[i].XCor - aircraftList_[j].XCor));
                         double xPower = Math.Pow((aircraftList_[i].XCor - aircraftList_[j].XCor), 2);
 
-                        double yDistance = (aircraftList_[i].YCor - aircraftList_[j].YCor);
+                        double yDistance = (Math.Abs(aircraftList_[i].YCor - aircraftList_[j].YCor));
                         double yPower = Math.Pow((aircraftList_[i].YCor - aircraftList_[j].YCor), 2);
 
                         double c = Math.Sqrt(xPower + yPower);

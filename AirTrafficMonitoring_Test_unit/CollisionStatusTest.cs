@@ -24,7 +24,7 @@ namespace AirTrafficMonitoring_Test_unit
 
         [TestCase(10000, 11000, 7000, 18000, 11000, 7000, false)]
         [TestCase(10000, 11000, 7000, 14500, 11000, 7000, true)]
-        public void detectCollision_dependingonXcoordinates_collisionstatus(int x1, int y1, int altitude1, int x2, int y2, int altitude2, bool collisionStatus_)
+        public void detectCollision_dependingonXcoordinates_collisionstatus(int x1, int y1, int altitude1, int x2, int y2, int altitude2, bool collisionStatusFromTest)
         {
             List<FlightDataDTO> TrackData = new List<FlightDataDTO>(); 
             FlightDataDTO flight1 = new FlightDataDTO("ATR423", x1, y1, altitude1, new DateTime(2019, 4, 17, 14, 30, 40), 0, 0, "");
@@ -34,12 +34,12 @@ namespace AirTrafficMonitoring_Test_unit
 
             UUT_.DetectCollision(TrackData);
 
-            Assert.That(UUT_.collisionStatus_, Is.EqualTo(true));
+            Assert.That(UUT_.collisionStatus_, Is.EqualTo(collisionStatusFromTest));
         }
 
-        [TestCase(10000, 20000, 7000, 10000, 11000, 7000, false)]
+        [TestCase(10000, 20000, 7000, 10000, 10000, 7000, false)]
         [TestCase(10000, 11000, 7000, 10000, 11600, 7000, true)]
-        public void detectCollision_dependingonYcoordinates_collisionstatus(int x1, int y1, int altitude1, int x2, int y2, int altitude2, bool collisionStatus_)
+        public void detectCollision_dependingonYcoordinates_collisionstatus(int x1, int y1, int altitude1, int x2, int y2, int altitude2, bool collisionStatusFromTest)
         {
             List<FlightDataDTO> TrackData = new List<FlightDataDTO>();
             FlightDataDTO flight1 = new FlightDataDTO("ATR423", x1, y1, altitude1, new DateTime(2019, 4, 17, 14, 30, 40), 0, 0, "");
@@ -49,12 +49,12 @@ namespace AirTrafficMonitoring_Test_unit
 
             UUT_.DetectCollision(TrackData);
 
-            Assert.That(UUT_.collisionStatus_, Is.EqualTo(true));
+            Assert.That(UUT_.collisionStatus_, Is.EqualTo(collisionStatusFromTest));
         }
 
         [TestCase(10000, 11000, 20000, 10000, 11000, 7000, false)]
-        [TestCase(10000, 11000, 7000, 10000, 11600, 7200, true)]
-        public void detectCollision_dependingOnAltitude_collisionstatus(int x1, int y1, int altitude1, int x2, int y2, int altitude2, bool collisionStatus_)
+        [TestCase(10000, 11000, 7000, 10000, 11000, 7200, true)]
+        public void detectCollision_dependingOnAltitude_collisionstatus(int x1, int y1, int altitude1, int x2, int y2, int altitude2, bool collisionStatusFromTest)
         {
             List<FlightDataDTO> TrackData = new List<FlightDataDTO>();
             FlightDataDTO flight1 = new FlightDataDTO("ATR423", x1, y1, altitude1, new DateTime(2019, 4, 17, 14, 30, 40), 0, 0, "");
@@ -64,8 +64,7 @@ namespace AirTrafficMonitoring_Test_unit
 
             UUT_.DetectCollision(TrackData);
 
-            Assert.That(UUT_.collisionStatus_, Is.EqualTo(true));
+            Assert.That(UUT_.collisionStatus_, Is.EqualTo(collisionStatusFromTest));
         }
-
     }
 }
