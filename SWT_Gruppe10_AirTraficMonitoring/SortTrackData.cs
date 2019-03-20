@@ -44,7 +44,8 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
         public void SortData(object sender, RawTransponderDataEventArgs e)
         {
-            
+            data = new List<FlightDataDTO>();
+
             DataRecieved_ = e.TransponderData;
 
             string[] inputfields;
