@@ -24,15 +24,17 @@ namespace SWT_Gruppe10_AirTraficMonitoring
         }
 
 
-        // Klassen blev tilføjet for at se om der kunne printes fra dll filen. 
+        //// Klassen blev tilføjet for at se om der kunne printes fra dll filen. 
         //private void RecieverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         //{
-            // Dette blev gjort for at se om dataen kom ind og printet på konsollen 
-           
-            // foreach (var c in e.TransponderData)
-            //{
-            //  Console.WriteLine(c);   
-            //}
+        //    //Dette blev gjort for at se om dataen kom ind og printet på konsollen
+
+
+        //     foreach (var c in e.TransponderData)
+        //        {
+        //            Console.WriteLine(c);
+        //        }
+        //    Console.WriteLine("\n\n");
         //}
 
 

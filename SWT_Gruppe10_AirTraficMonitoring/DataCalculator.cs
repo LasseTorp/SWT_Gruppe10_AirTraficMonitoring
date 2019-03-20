@@ -89,7 +89,26 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
                     if (x1 == x2)
                     {
-                        flight.Course = 0;
+                        if (y1 > y2)
+                        {
+                            flight.Course = 180;
+                        }
+                        else
+                        {
+                            flight.Course = 0;
+                        }
+                        
+                    }
+                    else if (y1 == y2)
+                    {
+                        if (x2 > x1)
+                        {
+                            flight.Course = 90;
+                        }
+                        else
+                        {
+                            flight.Course = 270;
+                        }
                     }
                     else
                     {
@@ -97,11 +116,17 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
                         course = Convert.ToInt32((180 / Math.PI) * Math.Atan((x2 - x1) / (y2 - y1)));
 
-                        if (course < 0)
+                        if ((x2 > x1 && y1 > y2)|| (x1 > x2 && y1 > y2))
                         {
-                            course = course + 360;
+                            course += 180;
                             flight.Course = course;
                         }
+                        else if (x1 > x2 && y1 < y2)
+                        {
+                            course += 360;
+                            flight.Course = course;
+                        }
+                        
                         else
                         {
                             flight.Course = course;
