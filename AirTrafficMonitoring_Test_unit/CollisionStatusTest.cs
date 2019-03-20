@@ -22,18 +22,36 @@ namespace AirTrafficMonitoring_Test_unit
             UUT_ = new CollisionStatus(fakeDataCalculator);
         }
 
-        [Test]
-        public void detectCollision_x1at11000x2at11500y1at10500y2at11500_collisionstatustrue()
+        [TestCase(10000, 11000, 7000, 18000, 11000, 7000, false)]
+        [TestCase(10000, 11000, 7000, 14500, 11000, 7000, true)]
+        public void detectCollision_dependingonXcoordinates_collisionstatustrue(int x1, int y1, int altitude1, int x2, int y2, int altitude2, bool collisionStatus_)
         {
             List<FlightDataDTO> TrackData = new List<FlightDataDTO>(); 
-            FlightDataDTO flight1 = new FlightDataDTO("ATR423", 11000, 10500, 7000, new DateTime(2019, 4, 17, 14, 30, 40), 0, 0, "");
-            FlightDataDTO flight2 = new FlightDataDTO("ATB675", 11500, 11500, 7000, new DateTime(2019, 4, 17, 14, 30, 40), 0, 0, "");
+            FlightDataDTO flight1 = new FlightDataDTO("ATR423", x1, y1, altitude1, new DateTime(2019, 4, 17, 14, 30, 40), 0, 0, "");
+            FlightDataDTO flight2 = new FlightDataDTO("ATB675", x2, y2, altitude2, new DateTime(2019, 4, 17, 14, 30, 40), 0, 0, "");
             TrackData.Add(flight1);
             TrackData.Add(flight2);
 
-            UUT_.DetectCollision(TrackData);
+            bool collisionStatus = collisionStatus_;
 
-            Assert.That(UUT_.collisionStatus_, Is.EqualTo(true));
+            UUT_.DetectCollision(TrackData);
+            Assert.That(UUT_.collisionStatus_, Is.EqualTo(collisionStatus));
+        }
+
+        [TestCase(10000, 20000, 7000, 10000, 11000, 7000, false)]
+        [TestCase(10000, 11000, 7000, 10000, 11500, 7000, true)]
+        public void detectCollision_dependingonYcoordinates_collisionstatustrue(int x1, int y1, int altitude1, int x2, int y2, int altitude2, bool collisionStatus_)
+        {
+            List<FlightDataDTO> TrackData = new List<FlightDataDTO>();
+            FlightDataDTO flight1 = new FlightDataDTO("ATR423", x1, y1, altitude1, new DateTime(2019, 4, 17, 14, 30, 40), 0, 0, "");
+            FlightDataDTO flight2 = new FlightDataDTO("ATB675", x2, y2, altitude2, new DateTime(2019, 4, 17, 14, 30, 40), 0, 0, "");
+            TrackData.Add(flight1);
+            TrackData.Add(flight2);
+
+            bool collisionStatus = collisionStatus_;
+
+            UUT_.DetectCollision(TrackData);
+            Assert.That(UUT_.collisionStatus_, Is.EqualTo(collisionStatus));
         }
 
     }

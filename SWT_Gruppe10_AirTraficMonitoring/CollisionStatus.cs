@@ -10,8 +10,8 @@ namespace SWT_Gruppe10_AirTraficMonitoring
     {
         public bool collisionStatus_ { get; set; }
         private string aircraftsColliding_;
-        private string aircraftInAirspace_; 
-        private List<string> aircraftsInAirspaceList;
+        private string aircraftInAirspace_;
+        private List<string> aircraftsInAirspaceList; 
         private List<FlightDataDTO> aircraftList;
         private List<string> aircraftscollidingStrings;
 
@@ -21,6 +21,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
         public CollisionStatus(IDataCalculator iDataCalculator)
         {
             iDataCalculator.DataCalculatedEvent += RecieveData;
+
         }
 
         public void RecieveData(object sender, AirTrafficEvent airTrafficEvent)
@@ -31,11 +32,15 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
         public void DetectCollision(List<FlightDataDTO> aircraftList_)
         {
+            aircraftscollidingStrings = new List<string>();
+            aircraftsInAirspaceList = new List<string>();
+            aircraftList = new List<FlightDataDTO>();
+
             for (int i = 0; i < aircraftList_.Count; i++)
             {
                 for (int j = i+1; j < aircraftList_.Count ; j++)
                 {
-                    if (aircraftList_[i].Altitude - aircraftList_[j].Altitude <= 300)
+                    if (aircraftList_[i].Altitude - aircraftList_[j].Altitude <= 300 && aircraftList_[i].Altitude - aircraftList_[j].Altitude >= -300)
                     {
                         double xDistance = (aircraftList_[i].XCor - aircraftList_[j].XCor);
                         double xPower = Math.Pow((aircraftList_[i].XCor - aircraftList_[j].XCor), 2);
@@ -45,12 +50,13 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
                         double c = Math.Sqrt(xPower + yPower);
 
-                        if (xDistance <= 500 || yDistance <= 5000|| c <= 5000)
+                        if (xDistance <= 5000 || yDistance <= 5000|| c <= 5000)
                         {
                             collisionStatus_ = true;
                             aircraftsColliding_ = aircraftList_[i].TimeStamp + aircraftList_[i].Tag + " is within the collisionrange with " +
                                                   aircraftList_[j].Tag;
                             aircraftscollidingStrings.Add(aircraftsColliding_);
+                        
 
                         }
                         else
@@ -72,7 +78,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                     }
                 }
             }
-            ShowData();
+            //ShowData();
         }
 
         public void ShowData()
@@ -81,7 +87,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
             {
                 log.LogCollision(aircraftscollidingStrings);
             }
-            else
+            else if (collisionStatus_ == false)
             {
                 print.PrintAircraftInfo(aircraftsInAirspaceList);
             }
