@@ -79,7 +79,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                     }
                 }
             }
-            //ShowData();
+            ShowData();
         }
 
         public void ShowData()
