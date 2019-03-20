@@ -9,5 +9,10 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
         public List<FlightDataDTO> AirTrafficList { get; set; }
 
+        public AirTrafficEvent(List<FlightDataDTO> airTrafficList_)
+        {
+            AirTrafficList = airTrafficList_;
+        }
+
     }
 }
