@@ -111,9 +111,10 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                     }
                     else
                     {
+                        
                         int course;
-
-                        course = Convert.ToInt32((180 / Math.PI) * Math.Atan((x2 - x1) / (y2 - y1)));
+                        
+                        course = Convert.ToInt32(((180 / Math.PI) * Math.Atan((Convert.ToDouble(x2 - x1)) / (y2 - y1))));
 
                         if ((x2 > x1 && y1 > y2)|| (x1 > x2 && y1 > y2))
                         {
