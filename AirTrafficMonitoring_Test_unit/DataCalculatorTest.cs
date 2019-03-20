@@ -63,7 +63,6 @@ namespace AirTrafficMonitoring_Test_unit
             fakeSortTrackData.SortDataEvent += Raise.EventWith(this, new AirTrafficEvent(Data_));
 
             Assert.That(UUT_.newTrackData,Is.EqualTo(Data_));
-            
 
         }
 

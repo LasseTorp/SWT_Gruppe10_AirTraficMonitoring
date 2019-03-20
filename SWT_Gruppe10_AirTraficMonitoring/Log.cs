@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace SWT_Gruppe10_AirTraficMonitoring
 {
-    class Log : ILog
+    public class Log : ILog
     {
         public void LogCollision(List<string> aircraftsCollidingList)
         {
             StreamWriter sw = new StreamWriter("Collision.txt");
-            sw.Write(aircraftsCollidingList);
+            sw.WriteLine(aircraftsCollidingList);
             //log aircraftscolliding til fil 
+            
         }
     }
 }

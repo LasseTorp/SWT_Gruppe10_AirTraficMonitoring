@@ -15,16 +15,14 @@ namespace AirTrafficMonitoring_Test_unit
     public class TransponderReceiverTest
     {
         private ITransponderReceiver fakeTransponderReceiver_;
-        private SortTrackData uut_;
-
-        //HER MANGLER UUT
+        private SortTrackData UUT_;
 
         [SetUp]
         public void Setup()
         {
             //Laver fake Transponder Data Receiver
             fakeTransponderReceiver_ = Substitute.For<ITransponderReceiver>();
-            uut_ = new SortTrackData(fakeTransponderReceiver_);
+            UUT_ = new SortTrackData(fakeTransponderReceiver_);
             
         }
 
@@ -37,12 +35,10 @@ namespace AirTrafficMonitoring_Test_unit
             Data_.Add("BCD123;10005;85890;12000;20151006213456789");
             Data_.Add("XYZ987;25059;75654;4000;20151006213456789");
 
-            // Act: Trigger the fake object to execute event invocation
             fakeTransponderReceiver_.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(Data_));
 
-            // Assert something here or use an NSubstitute Received
-            Assert.That(uut_.DataRecieved_, Is.EqualTo(Data_));
+            Assert.That(UUT_.DataRecieved_, Is.EqualTo(Data_));
         }
     }
 }

@@ -51,7 +51,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
                         double c = Math.Sqrt(xPower + yPower);
 
-                        if (xDistance <= 5000 && yDistance <= 5000 || c <= 5000)
+                        if ((xDistance <= 5000 && yDistance <= 5000) || c <= 5000)
                         {
                             collisionStatus_ = true;
                             aircraftsColliding_ = aircraftList_[i].TimeStamp + aircraftList_[i].Tag + " is within the collisionrange with " +
