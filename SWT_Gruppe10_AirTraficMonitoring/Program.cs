@@ -16,6 +16,10 @@ namespace SWT_Gruppe10_AirTraficMonitoring
             var receiver = TransponderReceiverFactory.CreateTransponderDataReceiver();
             
             var system = new SortTrackData(receiver);
+
+            var calculator = new DataCalculator(system);
+            
+            var collision = new CollisionStatus(calculator);
             
             while (true)
                 Thread.Sleep(1000);

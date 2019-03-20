@@ -24,25 +24,27 @@ namespace SWT_Gruppe10_AirTraficMonitoring
         }
 
 
-        // Klassen blev tilføjet for at se om der kunne printes fra dll filen. 
+        //// Klassen blev tilføjet for at se om der kunne printes fra dll filen. 
         //private void RecieverOnTransponderDataReady(object sender, RawTransponderDataEventArgs e)
         //{
-            // Dette blev gjort for at se om dataen kom ind og printet på konsollen 
-           
-            // foreach (var c in e.TransponderData)
-            //{
-            //  Console.WriteLine(c);   
-            //}
+        //    //Dette blev gjort for at se om dataen kom ind og printet på konsollen
+
+
+        //     foreach (var c in e.TransponderData)
+        //        {
+        //            Console.WriteLine(c);
+        //        }
+        //    Console.WriteLine("\n\n");
         //}
 
 
         public event EventHandler<AirTrafficEvent> SortDataEvent;
-        public List<FlightDataDTO> data = new List<FlightDataDTO>();
+        public List<FlightDataDTO> data;
         public List<string> DataRecieved_ { set; get; }
 
         public void SortData(object sender, RawTransponderDataEventArgs e)
         {
-            
+            data = new List<FlightDataDTO>();
             DataRecieved_ = e.TransponderData;
 
             string[] inputfields;
@@ -56,10 +58,12 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
                 //Console.WriteLine(DateTime.ParseExact(inputfields[4], "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
             }
-            
-            
-            AirTrafficEvent airTrafficEvent = new AirTrafficEvent(data);
-            SortDataEvent?.Invoke(this,airTrafficEvent);
+
+            if (!data.Contains(null))
+            {
+                AirTrafficEvent airTrafficEvent = new AirTrafficEvent(data);
+                SortDataEvent?.Invoke(this, airTrafficEvent);
+            }
             
         }
         

@@ -16,5 +16,6 @@ namespace SWT_Gruppe10_AirTraficMonitoring
             //log aircraftscolliding til fil 
             
         }
+
     }
 }

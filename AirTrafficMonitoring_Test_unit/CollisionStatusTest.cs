@@ -67,5 +67,17 @@ namespace AirTrafficMonitoring_Test_unit
 
             Assert.That(UUT_.collisionStatus_, Is.EqualTo(collisionStatusFromTest));
         }
+
+        [Test]
+        public void testRecieve()
+        {
+            List<FlightDataDTO> Data_ = new List<FlightDataDTO>();
+
+            Data_.Add(new FlightDataDTO("ABCD", 10, 10, 10, DateTime.Now, 10, 10, "true"));
+
+            fakeDataCalculator.DataCalculatedEvent += Raise.EventWith(this, new AirTrafficEvent(Data_));
+
+            Assert.That(UUT_.aircraftList, Is.EqualTo(Data_));
+        }
     }
 }
