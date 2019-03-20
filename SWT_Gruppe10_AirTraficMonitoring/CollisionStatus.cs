@@ -12,8 +12,9 @@ namespace SWT_Gruppe10_AirTraficMonitoring
         private string aircraftsColliding_;
         private string aircraftInAirspace_;
         private List<string> aircraftsInAirspaceList; 
-        private List<FlightDataDTO> aircraftList;
-        private List<string> aircraftscollidingStrings;
+        public List<FlightDataDTO> aircraftList { get; set; }
+        public List<FlightDataDTO> collidingAircrafts;
+        public List<CollidingFlightsDTO> CollidingFlightsDTOs; 
 
         private ILog log;
         private IPrint print; 
@@ -22,20 +23,23 @@ namespace SWT_Gruppe10_AirTraficMonitoring
         {
             iDataCalculator.DataCalculatedEvent += RecieveData;
             collisionStatus_ = false; 
+            log = new Log();
+            print = new Print();
 
         }
 
         public void RecieveData(object sender, AirTrafficEvent airTrafficEvent)
         {
+            aircraftList = new List<FlightDataDTO>();
             aircraftList = airTrafficEvent.AirTrafficList; 
             DetectCollision(aircraftList);
         }
 
         public void DetectCollision(List<FlightDataDTO> aircraftList_)
         {
-            aircraftscollidingStrings = new List<string>();
             aircraftsInAirspaceList = new List<string>();
-            aircraftList = new List<FlightDataDTO>();
+            CollidingFlightsDTOs = new List<CollidingFlightsDTO>();
+
 
             for (int i = 0; i < aircraftList_.Count; i++)
             {
@@ -56,25 +60,25 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                             collisionStatus_ = true;
                             aircraftsColliding_ = aircraftList_[i].TimeStamp + aircraftList_[i].Tag + " is within the collisionrange with " +
                                                   aircraftList_[j].Tag;
-                            aircraftscollidingStrings.Add(aircraftsColliding_);
-                        
+
+                            CollidingFlightsDTOs.Add(new CollidingFlightsDTO(aircraftList_[i].Tag, aircraftList_[j].Tag, aircraftsColliding_));
 
                         }
                         else
                         {
                             collisionStatus_ = false;
-                            aircraftInAirspace_ = "Aircrafttag: " + aircraftList_[i].Tag + ""+aircraftList_[i].Altitude+"" + aircraftList_[i].XCor +
-                                                  "" + aircraftList_[i].YCor + "" + aircraftList_[i].Course + "" +
-                                                  aircraftList_[i].Velocity;
+                            aircraftInAirspace_ = "Aircrafttag: " + aircraftList_[i].Tag + " Altitude: "+aircraftList_[i].Altitude+" X-Cor: " + aircraftList_[i].XCor +
+                                                  " Y-Cor: " + aircraftList_[i].YCor + " Course: " + aircraftList_[i].Course + " Velocity: " +
+                                                  aircraftList_[i].Velocity+" m/s \n";
                             aircraftsInAirspaceList.Add(aircraftInAirspace_);
                         }
                     }
                     else
                     {
                         collisionStatus_ = false;
-                        aircraftInAirspace_ = "Aircrafttag: " + aircraftList_[i].Tag + "" + aircraftList_[i].Altitude + "" + aircraftList_[i].XCor +
-                                              "" + aircraftList_[i].YCor + "" + aircraftList_[i].Course + "" +
-                                              aircraftList_[i].Velocity;
+                        aircraftInAirspace_ = "Aircrafttag: " + aircraftList_[i].Tag + " Altitude: " + aircraftList_[i].Altitude + " X-Cor: " + aircraftList_[i].XCor +
+                                              " Y-Cor: " + aircraftList_[i].YCor + " Course: " + aircraftList_[i].Course + " Velocity: " +
+                                              aircraftList_[i].Velocity+" m/s \n";
                         aircraftsInAirspaceList.Add(aircraftInAirspace_);
                     }
                 }
@@ -84,14 +88,8 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
         public void ShowData()
         {
-            if (collisionStatus_ == true)
-            {
-                log.LogCollision(aircraftscollidingStrings);
-            }
-            else if (collisionStatus_ == false)
-            {
+                log.LogCollision(CollidingFlightsDTOs);
                 print.PrintAircraftInfo(aircraftsInAirspaceList);
-            }
         }
     }
 }

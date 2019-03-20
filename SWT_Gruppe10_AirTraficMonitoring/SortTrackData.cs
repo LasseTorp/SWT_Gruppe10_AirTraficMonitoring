@@ -39,12 +39,12 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
 
         public event EventHandler<AirTrafficEvent> SortDataEvent;
-        public List<FlightDataDTO> data = new List<FlightDataDTO>();
+        public List<FlightDataDTO> data;
         public List<string> DataRecieved_ { set; get; }
 
         public void SortData(object sender, RawTransponderDataEventArgs e)
         {
-            
+            data = new List<FlightDataDTO>();
             DataRecieved_ = e.TransponderData;
 
             string[] inputfields;
@@ -58,10 +58,12 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
                 //Console.WriteLine(DateTime.ParseExact(inputfields[4], "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
             }
-            
-            
-            AirTrafficEvent airTrafficEvent = new AirTrafficEvent(data);
-            SortDataEvent?.Invoke(this,airTrafficEvent);
+
+            if (!data.Contains(null))
+            {
+                AirTrafficEvent airTrafficEvent = new AirTrafficEvent(data);
+                SortDataEvent?.Invoke(this, airTrafficEvent);
+            }
             
         }
         

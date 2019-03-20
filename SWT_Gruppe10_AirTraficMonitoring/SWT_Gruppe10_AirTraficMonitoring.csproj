@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollidingFlightsDTO.cs" />
     <Compile Include="CollisionStatus.cs" />
     <Compile Include="FlightDataDTO.cs" />
     <Compile Include="ICollisionStatus.cs" />

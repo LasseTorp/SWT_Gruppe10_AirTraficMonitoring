@@ -9,11 +9,6 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 {
     class Log : ILog
     {
-        public void LogCollision(List<string> aircraftsCollidingList)
-        {
-            StreamWriter sw = new StreamWriter("Collision.txt");
-            sw.Write(aircraftsCollidingList);
-            //log aircraftscolliding til fil 
-        }
+
     }
 }
