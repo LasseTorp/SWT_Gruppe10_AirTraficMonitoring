@@ -24,7 +24,6 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
                     fileWriter.WriteLine(aircraftsCollidingList[i].collidingAircraftsString);
 
-                    Console.WriteLine("^ÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅÅ");
                     fileWriter.Close();
                 }
             }
