@@ -58,7 +58,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                         if ((xDistance <= 5000 && yDistance <= 5000) || c <= 5000)
                         {
                             collisionStatus_ = true;
-                            aircraftsColliding_ = aircraftList_[i].TimeStamp + aircraftList_[i].Tag + " is within the collisionrange with " +
+                            aircraftsColliding_ = aircraftList_[i].TimeStamp+" "+aircraftList_[i].TimeStamp.Millisecond + " " + aircraftList_[i].Tag + " is within the collisionrange with " +
                                                   aircraftList_[j].Tag;
 
                             CollidingFlightsDTOs.Add(new CollidingFlightsDTO(aircraftList_[i].Tag, aircraftList_[j].Tag, aircraftsColliding_));
@@ -67,7 +67,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                         else
                         {
                             collisionStatus_ = false;
-                            aircraftInAirspace_ = "Aircrafttag: " + aircraftList_[i].Tag + " Altitude: "+aircraftList_[i].Altitude+" X-Cor: " + aircraftList_[i].XCor +
+                            aircraftInAirspace_ = "Time: " +aircraftList_[i].TimeStamp + ":" + aircraftList_[i].TimeStamp.Millisecond + " Aircrafttag: " + aircraftList_[i].Tag + " Altitude: "+aircraftList_[i].Altitude+" X-Cor: " + aircraftList_[i].XCor +
                                                   " Y-Cor: " + aircraftList_[i].YCor + " Course: " + aircraftList_[i].Course + " Velocity: " +
                                                   aircraftList_[i].Velocity+" m/s \n";
                             aircraftsInAirspaceList.Add(aircraftInAirspace_);
@@ -76,7 +76,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                     else
                     {
                         collisionStatus_ = false;
-                        aircraftInAirspace_ = "Aircrafttag: " + aircraftList_[i].Tag + " Altitude: " + aircraftList_[i].Altitude + " X-Cor: " + aircraftList_[i].XCor +
+                        aircraftInAirspace_ = "Time: " + aircraftList_[i].TimeStamp + ":" + aircraftList_[i].TimeStamp.Millisecond + " Aircrafttag: " + aircraftList_[i].Tag + " Altitude: " + aircraftList_[i].Altitude + " X-Cor: " + aircraftList_[i].XCor +
                                               " Y-Cor: " + aircraftList_[i].YCor + " Course: " + aircraftList_[i].Course + " Velocity: " +
                                               aircraftList_[i].Velocity+" m/s \n";
                         aircraftsInAirspaceList.Add(aircraftInAirspace_);
