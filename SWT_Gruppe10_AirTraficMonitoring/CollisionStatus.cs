@@ -58,7 +58,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                         if ((xDistance <= 5000 && yDistance <= 5000) || c <= 5000)
                         {
                             collisionStatus_ = true;
-                            aircraftsColliding_ = aircraftList_[i].TimeStamp+":"+aircraftList_[i].TimeStamp.Millisecond + " " + aircraftList_[i].Tag + " is within the collisionrange with " +
+                            aircraftsColliding_ = "Time: " + aircraftList_[i].TimeStamp+":"+aircraftList_[i].TimeStamp.Millisecond + " - " + aircraftList_[i].Tag + " is within the collisionrange of " +
                                                   aircraftList_[j].Tag;
 
                             CollidingFlightsDTOs.Add(new CollidingFlightsDTO(aircraftList_[i].Tag, aircraftList_[j].Tag, aircraftsColliding_));
