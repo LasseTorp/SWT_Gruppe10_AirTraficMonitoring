@@ -59,19 +59,65 @@ namespace AirTrafficMonitoring_Test_unit
             Assert.That(flight.Velocity, Is.EqualTo(expectedResult));
         }
 
-
         [Test]
         public void testReception()
         {
             List<FlightDataDTO> Data_ = new List<FlightDataDTO>();
-            
-            Data_.Add(new FlightDataDTO("ABCD",10,10,10,DateTime.Now, 10,10,"true"));
+
+            Data_.Add(new FlightDataDTO("ABCD", 10, 10, 10, DateTime.Now, 10, 10, "true"));
 
             fakeSortTrackData.SortDataEvent += Raise.EventWith(this, new AirTrafficEvent(Data_));
 
-            Assert.That(UUT_.newTrackData,Is.EqualTo(Data_));
+            Assert.That(UUT_.newTrackData, Is.EqualTo(Data_));
 
         }
+
+        [Test]
+        public void Calculator_callOneEvents_firstTimeEqualsFalse()
+        {
+            List<FlightDataDTO> Data1 = new List<FlightDataDTO>();
+            
+            Data1.Add(new FlightDataDTO("ABCD", 6000, 6000, 7000, DateTime.Now, 0, 0, ""));
+            
+            fakeSortTrackData.SortDataEvent += Raise.EventWith(this, new AirTrafficEvent(Data1));
+           
+            Assert.That(UUT_.firstTime, Is.EqualTo(false));
+
+        }
+
+        [Test]
+        public void Calculator_callTwoEvents_getVelocityCalculated()
+        {
+            List<FlightDataDTO> Data1 = new List<FlightDataDTO>();
+            List<FlightDataDTO> Data2 = new List<FlightDataDTO>();
+
+            Data1.Add(new FlightDataDTO("ABCD", 6000, 6000, 7000, new DateTime(2019, 4, 17, 13, 30, 10), 0, 0, ""));
+            Data2.Add(new FlightDataDTO("ABCD", 6000, 10000, 4000, new DateTime(2019, 4, 17, 13, 30, 30), 0, 0, ""));
+
+            fakeSortTrackData.SortDataEvent += Raise.EventWith(this, new AirTrafficEvent(Data1));
+            fakeSortTrackData.SortDataEvent += Raise.EventWith(this, new AirTrafficEvent(Data2));
+
+            Assert.That(UUT_.newTrackData[0].Velocity, Is.EqualTo(250));
+            
+        }
+
+        [Test]
+        public void Calculator_callTwoEvents_getCourseCalculated()
+        {
+            List<FlightDataDTO> Data1 = new List<FlightDataDTO>();
+            List<FlightDataDTO> Data2 = new List<FlightDataDTO>();
+
+            Data1.Add(new FlightDataDTO("ABCD", 6000, 6000, 7000, new DateTime(2019, 4, 17, 13, 30, 10), 0, 0, ""));
+            Data2.Add(new FlightDataDTO("ABCD", 12000, 12000, 4000, new DateTime(2019, 4, 17, 13, 30, 30), 0, 0, ""));
+
+            fakeSortTrackData.SortDataEvent += Raise.EventWith(this, new AirTrafficEvent(Data1));
+            fakeSortTrackData.SortDataEvent += Raise.EventWith(this, new AirTrafficEvent(Data2));
+
+            Assert.That(UUT_.newTrackData[0].Course, Is.EqualTo(45));
+
+        }
+
+       
 
     }
 }
