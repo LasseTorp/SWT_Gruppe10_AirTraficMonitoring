@@ -19,7 +19,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                 if (!previousLoggedFlights.Contains(aircraftsCollidingList[i].flightTag1+" & "+aircraftsCollidingList[i].flightTag2))
                 {
                     FileStream output =
-                        new FileStream("CollidingAircrafts.txt", FileMode.OpenOrCreate, FileAccess.Write);
+                        new FileStream("CollidingAircrafts.txt", FileMode.Append, FileAccess.Write);
 
                     StreamWriter fileWriter = new StreamWriter(output);
 
