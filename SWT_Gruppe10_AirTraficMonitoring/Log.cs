@@ -29,7 +29,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
                     previousLoggedFlights.Add(aircraftsCollidingList[i].flightTag1+" & "+aircraftsCollidingList[i].flightTag2);
 
-                    //OVERSKRIVER DEN TIDLIGERE KOLLISION (FEJL)
+              
                 }
             }
         }
