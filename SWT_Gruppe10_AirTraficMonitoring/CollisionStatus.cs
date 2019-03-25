@@ -64,24 +64,16 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                             CollidingFlightsDTOs.Add(new CollidingFlightsDTO(aircraftList_[i].Tag, aircraftList_[j].Tag, aircraftsColliding_));
 
                         }
-                        else
-                        {
-                            collisionStatus_ = false;
-                            aircraftInAirspace_ = "Time: " +aircraftList_[i].TimeStamp + ":" + aircraftList_[i].TimeStamp.Millisecond + " Aircrafttag: " + aircraftList_[i].Tag + " Altitude: "+aircraftList_[i].Altitude+" X-Cor: " + aircraftList_[i].XCor +
-                                                  " Y-Cor: " + aircraftList_[i].YCor + " Course: " + aircraftList_[i].Course + " Velocity: " +
-                                                  aircraftList_[i].Velocity+" m/s \n";
-                            aircraftsInAirspaceList.Add(aircraftInAirspace_);
-                        }
+                        
                     }
-                    else
-                    {
-                        collisionStatus_ = false;
-                        aircraftInAirspace_ = "Time: " + aircraftList_[i].TimeStamp + ":" + aircraftList_[i].TimeStamp.Millisecond + " Aircrafttag: " + aircraftList_[i].Tag + " Altitude: " + aircraftList_[i].Altitude + " X-Cor: " + aircraftList_[i].XCor +
-                                              " Y-Cor: " + aircraftList_[i].YCor + " Course: " + aircraftList_[i].Course + " Velocity: " +
-                                              aircraftList_[i].Velocity+" m/s \n";
-                        aircraftsInAirspaceList.Add(aircraftInAirspace_);
-                    }
+                    
                 }
+
+                
+                aircraftInAirspace_ = "Time: " + aircraftList_[i].TimeStamp + ":" + aircraftList_[i].TimeStamp.Millisecond + " Aircrafttag: " + aircraftList_[i].Tag + " Altitude: " + aircraftList_[i].Altitude + " X-Cor: " + aircraftList_[i].XCor +
+                                      " Y-Cor: " + aircraftList_[i].YCor + " Course: " + aircraftList_[i].Course + " Velocity: " +
+                                      aircraftList_[i].Velocity + " m/s \n";
+                aircraftsInAirspaceList.Add(aircraftInAirspace_);
             }
             ShowData();
         }
