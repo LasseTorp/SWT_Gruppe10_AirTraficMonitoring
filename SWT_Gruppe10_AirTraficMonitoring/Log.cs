@@ -25,8 +25,6 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                     fileWriter.WriteLine(aircraftsCollidingList[i].collidingAircraftsString);
 
                     fileWriter.Close();
-
-                    //OVERSKRIVER DEN TIDLIGERE KOLLISION (FEJL)
                 }
             }
         }
