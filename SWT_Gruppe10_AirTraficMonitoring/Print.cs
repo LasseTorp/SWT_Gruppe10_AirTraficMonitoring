@@ -8,13 +8,24 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 {
     class Print : IPrint
     {
-        public void PrintAircraftInfo(List<string> aircraftsInAirspaceList)
+        public DataCalculator(ISortTrackData sortTrackData)
+        {
+            firstTime = true;
+            sortTrackData.SortDataEvent += calculate;
+            oldTrackData = new List<FlightDataDTO>();
+        }
+
+        public Print(IDataCalculator dataCalculator)
+        {
+            dataCalculator.DataCalculatedEvent += ConsolePrint;
+
+        }
+        public void ConsolePrint(object sender, AirTrafficEvent e)
         {
             foreach (var aircraftsInAirspace in aircraftsInAirspaceList)
             {
                 Console.WriteLine(aircraftsInAirspace);
             }
         }
-
     }
 }
