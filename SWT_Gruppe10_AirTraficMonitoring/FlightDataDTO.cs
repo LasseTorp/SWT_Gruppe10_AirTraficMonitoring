@@ -17,7 +17,9 @@ namespace SWT_Gruppe10_AirTraficMonitoring
         public int Velocity { get; set; }
         public int Course { get; set; }
 
-        public FlightDataDTO(string tag, int xcor, int ycor, int altitude, DateTime timestamp, int velocity, int course)
+        public CollidingFlightsDTO CollidingFlightsDto { get; set; } 
+
+        public FlightDataDTO(string tag, int xcor, int ycor, int altitude, DateTime timestamp, int velocity, int course, CollidingFlightsDTO collidingFlightsDTO)
         {
             Tag = tag;
             XCor = xcor;
@@ -26,6 +28,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
             TimeStamp = timestamp;
             Velocity = velocity;
             Course = course;
+            CollidingFlightsDto = collidingFlightsDTO; 
         }
 
     }

@@ -9,7 +9,10 @@ namespace SWT_Gruppe10_AirTraficMonitoring
     public class CollisionStatus : ICollisionStatus
     {
         public bool collisionStatus_ { get; set; }
-        //private string aircraftsColliding_;
+        private string aircraftsColliding_;
+
+        public event EventHandler<AirTrafficEvent> CollisionStatusEvent;
+
         //private string aircraftInAirspace_;
         //private List<string> aircraftsInAirspaceList; 
         public List<FlightDataDTO> aircraftList { get; set; }
@@ -58,8 +61,11 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                         if ((xDistance <= 5000 && yDistance <= 5000) || c <= 5000)
                         {
                             collisionStatus_ = true;
-                            //aircraftsColliding_ = "Time: " + aircraftList_[i].TimeStamp+":"+aircraftList_[i].TimeStamp.Millisecond + " - " + aircraftList_[i].Tag + " is within the collisionrange of " +
-                            //                      aircraftList_[j].Tag;
+                            aircraftsColliding_ = "Time: " + aircraftList_[i].TimeStamp+":"+aircraftList_[i].TimeStamp.Millisecond + " - " + aircraftList_[i].Tag + " is within the collisionrange of " +
+                                                  aircraftList_[j].Tag;
+
+                            aircraftList_[i].CollidingFlightsDto = new CollidingFlightsDTO(aircraftList_[i].Tag,
+                                aircraftList_[j].Tag, aircraftsColliding_);
 
                             //CollidingFlightsDTOs.Add(new CollidingFlightsDTO(aircraftList_[i].Tag, aircraftList_[j].Tag, aircraftsColliding_));
 
@@ -75,6 +81,8 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                 //aircraftsInAirspaceList.Add(aircraftInAirspace_);
             }
             //ShowData();
+            AirTrafficEvent airTrafficEvent = new AirTrafficEvent(aircraftList_);
+            CollisionStatusEvent?.Invoke(this, airTrafficEvent);
         }
 
         //public void ShowData()
