@@ -10,7 +10,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
     public class Log : ILog
     {
         //private List<CollidingFlightsDTO> previousLoggedFlights = new List<CollidingFlightsDTO>();
-        private List<string> previousLoggedFlights = new List<string>();
+        //private List<string> previousLoggedFlights = new List<string>();
 
         public void LogCollision(List<CollidingFlightsDTO> aircraftsCollidingList)
         {
