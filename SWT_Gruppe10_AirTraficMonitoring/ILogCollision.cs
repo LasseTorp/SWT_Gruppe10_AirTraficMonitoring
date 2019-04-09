@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SWT_Gruppe10_AirTraficMonitoring
 {
-    interface ILogCollision
+    public interface ILogCollision
     {
         event EventHandler<AirTrafficEvent> DeterminedLogEvent;
         void DetermineLog(object sender, AirTrafficEvent e);
