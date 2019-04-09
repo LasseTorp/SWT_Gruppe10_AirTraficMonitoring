@@ -33,7 +33,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
         {
             foreach (var aircraftsInAirspaceColliding in e.AirTrafficList)
             {
-                Console.WriteLine(aircraftsInAirspaceColliding.CollidingFlightsDto.collidingAircraftsString);
+                Console.WriteLine(aircraftsInAirspaceColliding.CollidingFlightsDto.collidingAircraftsString + "\n");
             }
         }
     }
