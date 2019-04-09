@@ -48,15 +48,19 @@
   <ItemGroup>
     <Compile Include="CollidingFlightsDTO.cs" />
     <Compile Include="CollisionStatus.cs" />
+    <Compile Include="Filter.cs" />
     <Compile Include="FlightDataDTO.cs" />
     <Compile Include="ICollisionStatus.cs" />
+    <Compile Include="IFilter.cs" />
     <Compile Include="ILog.cs" />
+    <Compile Include="ILogCollision.cs" />
     <Compile Include="IPrint.cs" />
     <Compile Include="AirTrafficEvent.cs" />
     <Compile Include="ISortTrackData.cs" />
     <Compile Include="DataCalculator.cs" />
     <Compile Include="IDataCalculator.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="LogCollision.cs" />
     <Compile Include="Print.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
