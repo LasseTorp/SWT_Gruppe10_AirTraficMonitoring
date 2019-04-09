@@ -13,10 +13,10 @@ namespace SWT_Gruppe10_AirTraficMonitoring
         public bool firstTime { set; get; }
         
 
-        public DataCalculator(ISortTrackData sortTrackData)
+        public DataCalculator(IFilter filter)
         {
             firstTime = true;
-            sortTrackData.SortDataEvent += calculate;
+            filter.FiltratedEvent += calculate;
             oldTrackData = new List<FlightDataDTO>();
         }
 

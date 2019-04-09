@@ -56,12 +56,10 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
                 inputfields = flightData.Split(';');
 
-                if (Convert.ToInt32(inputfields[1]) <= 85000 && Convert.ToInt32(inputfields[1]) >= 5000 && Convert.ToInt32(inputfields[2]) <= 85000 && Convert.ToInt32(inputfields[2]) >= 5000)
-                {
-                    data.Add(new FlightDataDTO(inputfields[0], Convert.ToInt32(inputfields[1]), Convert.ToInt32(inputfields[2]),
+                data.Add(new FlightDataDTO(inputfields[0], Convert.ToInt32(inputfields[1]), Convert.ToInt32(inputfields[2]),
                         Convert.ToInt32(inputfields[3]), DateTime.ParseExact(inputfields[4], "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture), 0, 0));
 
-                }
+                
 
                 //Console.WriteLine(DateTime.ParseExact(inputfields[4], "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
             }
