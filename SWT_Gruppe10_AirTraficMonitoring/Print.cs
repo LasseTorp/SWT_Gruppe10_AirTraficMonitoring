@@ -8,13 +8,6 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 {
     class Print : IPrint
     {
-        public DataCalculator(ISortTrackData sortTrackData)
-        {
-            firstTime = true;
-            sortTrackData.SortDataEvent += calculate;
-            oldTrackData = new List<FlightDataDTO>();
-        }
-
         public Print(IDataCalculator dataCalculator)
         {
             dataCalculator.DataCalculatedEvent += ConsolePrint;
@@ -22,9 +15,10 @@ namespace SWT_Gruppe10_AirTraficMonitoring
         }
         public void ConsolePrint(object sender, AirTrafficEvent e)
         {
-            foreach (var aircraftsInAirspace in aircraftsInAirspaceList)
+            foreach (var aircraftsInAirspace in e.AirTrafficList)
             {
-                Console.WriteLine(aircraftsInAirspace);
+                Console.WriteLine("Time: " + aircraftsInAirspace.TimeStamp + ":" + aircraftsInAirspace.TimeStamp.Millisecond + "Aircrafttag: " + aircraftsInAirspace.Tag + " Altitude: " + aircraftsInAirspace.Altitude + 
+                                  " X-Cor: " + aircraftsInAirspace.XCor + " Y-Cor " + aircraftsInAirspace.YCor + " Course: " + aircraftsInAirspace.Course + " Velocity: " + aircraftsInAirspace.Velocity + " m/s \n");
             }
         }
     }
