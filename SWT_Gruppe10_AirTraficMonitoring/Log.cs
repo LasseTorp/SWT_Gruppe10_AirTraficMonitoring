@@ -12,26 +12,29 @@ namespace SWT_Gruppe10_AirTraficMonitoring
         //private List<CollidingFlightsDTO> previousLoggedFlights = new List<CollidingFlightsDTO>();
         //private List<string> previousLoggedFlights = new List<string>();
 
-        public void LogCollision(List<CollidingFlightsDTO> aircraftsCollidingList)
+        public Log(ILogCollision logCollision)
         {
-            for (int i = 0; i < aircraftsCollidingList.Count; i++)
+            logCollision.DeterminedLogEvent += LogCollision;
+        }
+
+        public void LogCollision(object sender, AirTrafficEvent e)
+        {
+            List<FlightDataDTO> aircraftsCollidingList = new List<FlightDataDTO>();
+            aircraftsCollidingList = e.AirTrafficList;
+
+            foreach (var flight in aircraftsCollidingList)
             {
-                if (!previousLoggedFlights.Contains(aircraftsCollidingList[i].flightTag1+" & "+aircraftsCollidingList[i].flightTag2))
-                {
-                    FileStream output =
-                        new FileStream("CollidingAircrafts.txt", FileMode.Append, FileAccess.Write);
+                FileStream output =
+                    new FileStream("CollidingAircrafts.txt", FileMode.Append, FileAccess.Write);
 
-                    StreamWriter fileWriter = new StreamWriter(output);
+                StreamWriter fileWriter = new StreamWriter(output);
 
-                    fileWriter.WriteLine(aircraftsCollidingList[i].collidingAircraftsString);
+                fileWriter.WriteLine(flight.CollidingFlightsDto.collidingAircraftsString);
 
-                    fileWriter.Close();
-
-                    previousLoggedFlights.Add(aircraftsCollidingList[i].flightTag1+" & "+aircraftsCollidingList[i].flightTag2);
-
-              
-                }
+                fileWriter.Close();
             }
+
+           
         }
     }
 }

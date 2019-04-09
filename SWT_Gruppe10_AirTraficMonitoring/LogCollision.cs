@@ -10,25 +10,33 @@ namespace SWT_Gruppe10_AirTraficMonitoring
     {
         private List<string> previousLoggedFlights = new List<string>();
         public event EventHandler<AirTrafficEvent> DeterminedLogEvent;
-       
-
+        
         public LogCollision(ICollisionStatus collisionStatus)
         {
-            collisionStatus.
+            collisionStatus.CollisionStatusEvent += DetermineLog;
         }
 
         public void DetermineLog(object sender, AirTrafficEvent e)
         {
+            List<FlightDataDTO> aircraftsCollidingList = new List<FlightDataDTO>();
+            aircraftsCollidingList = e.AirTrafficList;
+
+            List<FlightDataDTO> newCollisionFlights = new List<FlightDataDTO>();
+
             for (int i = 0; i < aircraftsCollidingList.Count; i++)
             {
-                if (!previousLoggedFlights.Contains(aircraftsCollidingList[i].flightTag1 + " & " + aircraftsCollidingList[i].flightTag2))
+                if (!previousLoggedFlights.Contains(aircraftsCollidingList[i].CollidingFlightsDto.flightTag1 + " & " + aircraftsCollidingList[i].CollidingFlightsDto.flightTag2))
                 {
                    
-                    previousLoggedFlights.Add(aircraftsCollidingList[i].flightTag1 + " & " + aircraftsCollidingList[i].flightTag2);
+                    newCollisionFlights.Add(aircraftsCollidingList[i]);
 
-
+                    previousLoggedFlights.Add(aircraftsCollidingList[i].CollidingFlightsDto.flightTag1 + " & " + aircraftsCollidingList[i].CollidingFlightsDto.flightTag2);
+                    
                 }
             }
+
+            AirTrafficEvent airTrafficEvent = new AirTrafficEvent(newCollisionFlights);
+            DeterminedLogEvent?.Invoke(this, airTrafficEvent);
         }
     }
 }
