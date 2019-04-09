@@ -19,7 +19,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
             
             var filter = new Filter(system);
 
-            var calculator = new DataCalculator(system);
+            var calculator = new DataCalculator(filter);
             
             var collision = new CollisionStatus(calculator);
 
