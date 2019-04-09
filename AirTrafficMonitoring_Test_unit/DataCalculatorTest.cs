@@ -13,13 +13,13 @@ namespace AirTrafficMonitoring_Test_unit
     public class DataCalculatorTest
     {
         private DataCalculator UUT_;
-        private ISortTrackData fakeSortTrackData;
+        private IFilter fakeFilter;
 
         [SetUp]
         public void setUp()
         {
-            fakeSortTrackData = Substitute.For<ISortTrackData>();
-            UUT_ = new DataCalculator(fakeSortTrackData);
+            fakeFilter = Substitute.For<IFilter>();
+            UUT_ = new DataCalculator(fakeFilter);
         }
 
 
@@ -35,10 +35,10 @@ namespace AirTrafficMonitoring_Test_unit
         [TestCase(1, 1, 8000, 24000, 18)]
         public void calculateCourse_startandEnd_degrees(int s1, int s2, int s3, int s4, int expectedResult)
         {
-            UUT_.oldTrackData.Add(new FlightDataDTO("ATR423", s1, s2, 7000, new DateTime(2019, 4, 17, 13, 30, 10),0, 0));
+            UUT_.oldTrackData.Add(new FlightDataDTO("ATR423", s1, s2, 7000, new DateTime(2019, 4, 17, 13, 30, 10),0, 0, new CollidingFlightsDTO("", "", "")));
 
             FlightDataDTO flight = new FlightDataDTO("ATR423", s3, s4, 7000,
-                new DateTime(2019, 4, 17, 14, 30, 10), 0, 0);
+                new DateTime(2019, 4, 17, 14, 30, 10), 0, 0, new CollidingFlightsDTO("", "", ""));
             UUT_.calculateCourse(flight);
 
             Assert.That(flight.Course, Is.EqualTo(expectedResult));
@@ -50,9 +50,9 @@ namespace AirTrafficMonitoring_Test_unit
         [TestCase(6000, 10000, 4000, 6000, 6000, 7000, 250)]
         public void calculateVelocity_XYdifferenceHighDifferenceTimeDifference_meterprsecond(int s1, int s2, int s3, int s4, int s5, int s6, int expectedResult)
         {
-            UUT_.oldTrackData.Add(new FlightDataDTO("BTU423", s1, s2, s3, new DateTime(2019, 4, 17, 13, 30, 10), 0, 0));
+            UUT_.oldTrackData.Add(new FlightDataDTO("BTU423", s1, s2, s3, new DateTime(2019, 4, 17, 13, 30, 10), 0, 0, new CollidingFlightsDTO("", "", "")));
             FlightDataDTO flight = new FlightDataDTO("BTU423", s4, s5, s6,
-                new DateTime(2019, 4, 17, 13, 30, 30), 0, 0);
+                new DateTime(2019, 4, 17, 13, 30, 30), 0, 0, new CollidingFlightsDTO("", "", ""));
 
             UUT_.CalculateVelocity(flight);
 
@@ -64,9 +64,9 @@ namespace AirTrafficMonitoring_Test_unit
         {
             List<FlightDataDTO> Data_ = new List<FlightDataDTO>();
 
-            Data_.Add(new FlightDataDTO("ABCD", 10, 10, 10, DateTime.Now, 10, 10));
+            Data_.Add(new FlightDataDTO("ABCD", 10, 10, 10, DateTime.Now, 10, 10, new CollidingFlightsDTO("", "", "")));
 
-            fakeSortTrackData.SortDataEvent += Raise.EventWith(this, new AirTrafficEvent(Data_));
+            fakeFilter.FiltratedEvent += Raise.EventWith(this, new AirTrafficEvent(Data_));
 
             Assert.That(UUT_.newTrackData, Is.EqualTo(Data_));
 
@@ -77,9 +77,9 @@ namespace AirTrafficMonitoring_Test_unit
         {
             List<FlightDataDTO> Data1 = new List<FlightDataDTO>();
             
-            Data1.Add(new FlightDataDTO("ABCD", 6000, 6000, 7000, DateTime.Now, 0, 0));
-            
-            fakeSortTrackData.SortDataEvent += Raise.EventWith(this, new AirTrafficEvent(Data1));
+            Data1.Add(new FlightDataDTO("ABCD", 6000, 6000, 7000, DateTime.Now, 0, 0, new CollidingFlightsDTO("", "", "")));
+
+            fakeFilter.FiltratedEvent += Raise.EventWith(this, new AirTrafficEvent(Data1));
            
             Assert.That(UUT_.firstTime, Is.EqualTo(false));
 
@@ -91,11 +91,11 @@ namespace AirTrafficMonitoring_Test_unit
             List<FlightDataDTO> Data1 = new List<FlightDataDTO>();
             List<FlightDataDTO> Data2 = new List<FlightDataDTO>();
 
-            Data1.Add(new FlightDataDTO("ABCD", 6000, 6000, 7000, new DateTime(2019, 4, 17, 13, 30, 10), 0, 0));
-            Data2.Add(new FlightDataDTO("ABCD", 6000, 10000, 4000, new DateTime(2019, 4, 17, 13, 30, 30), 0, 0));
+            Data1.Add(new FlightDataDTO("ABCD", 6000, 6000, 7000, new DateTime(2019, 4, 17, 13, 30, 10), 0, 0, new CollidingFlightsDTO("", "", "")));
+            Data2.Add(new FlightDataDTO("ABCD", 6000, 10000, 4000, new DateTime(2019, 4, 17, 13, 30, 30), 0, 0, new CollidingFlightsDTO("", "", "")));
 
-            fakeSortTrackData.SortDataEvent += Raise.EventWith(this, new AirTrafficEvent(Data1));
-            fakeSortTrackData.SortDataEvent += Raise.EventWith(this, new AirTrafficEvent(Data2));
+            fakeFilter.FiltratedEvent += Raise.EventWith(this, new AirTrafficEvent(Data1));
+            fakeFilter.FiltratedEvent += Raise.EventWith(this, new AirTrafficEvent(Data2));
 
             Assert.That(UUT_.newTrackData[0].Velocity, Is.EqualTo(250));
             
@@ -107,11 +107,11 @@ namespace AirTrafficMonitoring_Test_unit
             List<FlightDataDTO> Data1 = new List<FlightDataDTO>();
             List<FlightDataDTO> Data2 = new List<FlightDataDTO>();
 
-            Data1.Add(new FlightDataDTO("ABCD", 6000, 6000, 7000, new DateTime(2019, 4, 17, 13, 30, 10), 0, 0));
-            Data2.Add(new FlightDataDTO("ABCD", 12000, 12000, 4000, new DateTime(2019, 4, 17, 13, 30, 30), 0, 0));
+            Data1.Add(new FlightDataDTO("ABCD", 6000, 6000, 7000, new DateTime(2019, 4, 17, 13, 30, 10), 0, 0, new CollidingFlightsDTO("", "", "")));
+            Data2.Add(new FlightDataDTO("ABCD", 12000, 12000, 4000, new DateTime(2019, 4, 17, 13, 30, 30), 0, 0, new CollidingFlightsDTO("", "", "")));
 
-            fakeSortTrackData.SortDataEvent += Raise.EventWith(this, new AirTrafficEvent(Data1));
-            fakeSortTrackData.SortDataEvent += Raise.EventWith(this, new AirTrafficEvent(Data2));
+            fakeFilter.FiltratedEvent += Raise.EventWith(this, new AirTrafficEvent(Data1));
+            fakeFilter.FiltratedEvent += Raise.EventWith(this, new AirTrafficEvent(Data2));
 
             Assert.That(UUT_.newTrackData[0].Course, Is.EqualTo(45));
 

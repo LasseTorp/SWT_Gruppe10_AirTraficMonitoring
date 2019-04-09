@@ -57,7 +57,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                 inputfields = flightData.Split(';');
 
                 data.Add(new FlightDataDTO(inputfields[0], Convert.ToInt32(inputfields[1]), Convert.ToInt32(inputfields[2]),
-                        Convert.ToInt32(inputfields[3]), DateTime.ParseExact(inputfields[4], "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture), 0, 0));
+                        Convert.ToInt32(inputfields[3]), DateTime.ParseExact(inputfields[4], "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture), 0, 0, new CollidingFlightsDTO("", "", "")));
 
                 
 
