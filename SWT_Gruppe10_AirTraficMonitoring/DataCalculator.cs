@@ -38,7 +38,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
             oldTrackData = newTrackData;
             firstTime = false;
-
+            
             AirTrafficEvent airTrafficEvent = new AirTrafficEvent(newTrackData);
             DataCalculatedEvent?.Invoke(this, airTrafficEvent);
             
