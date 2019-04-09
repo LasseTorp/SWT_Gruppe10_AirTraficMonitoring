@@ -8,10 +8,10 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 {
     class Print : IPrint
     {
-        public Print(IDataCalculator dataCalculator)
+        public Print(IDataCalculator dataCalculator, ILogCollision logCollision)
         {
             dataCalculator.DataCalculatedEvent += ConsolePrint;
-
+            logCollision.DeterminedLogEvent += ConsolePrintCollision;
         }
         public void ConsolePrint(object sender, AirTrafficEvent e)
         {
@@ -19,6 +19,14 @@ namespace SWT_Gruppe10_AirTraficMonitoring
             {
                 Console.WriteLine("Time: " + aircraftsInAirspace.TimeStamp + ":" + aircraftsInAirspace.TimeStamp.Millisecond + "Aircrafttag: " + aircraftsInAirspace.Tag + " Altitude: " + aircraftsInAirspace.Altitude + 
                                   " X-Cor: " + aircraftsInAirspace.XCor + " Y-Cor " + aircraftsInAirspace.YCor + " Course: " + aircraftsInAirspace.Course + " Velocity: " + aircraftsInAirspace.Velocity + " m/s \n");
+            }
+        }
+
+        public void ConsolePrintCollision(object sender, AirTrafficEvent e)
+        {
+            foreach (var aircraftsInAirspaceColliding in e.AirTrafficList)
+            {
+                Console.WriteLine(aircraftsInAirspaceColliding.CollidingFlightsDto.collidingAircraftsString);
             }
         }
     }
