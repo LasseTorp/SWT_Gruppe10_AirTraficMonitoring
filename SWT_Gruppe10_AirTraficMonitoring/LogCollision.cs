@@ -25,14 +25,18 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
             for (int i = 0; i < aircraftsCollidingList.Count; i++)
             {
-                if (!previousLoggedFlights.Contains(aircraftsCollidingList[i].CollidingFlightsDto.flightTag1 + " & " + aircraftsCollidingList[i].CollidingFlightsDto.flightTag2))
+                if (aircraftsCollidingList[i].CollidingFlightsDto.collidingAircraftsString != "")
                 {
-                   
-                    newCollisionFlights.Add(aircraftsCollidingList[i]);
+                    if (!previousLoggedFlights.Contains(aircraftsCollidingList[i].CollidingFlightsDto.flightTag1 + " & " + aircraftsCollidingList[i].CollidingFlightsDto.flightTag2))
+                    {
 
-                    previousLoggedFlights.Add(aircraftsCollidingList[i].CollidingFlightsDto.flightTag1 + " & " + aircraftsCollidingList[i].CollidingFlightsDto.flightTag2);
-                    
+                        newCollisionFlights.Add(aircraftsCollidingList[i]);
+
+                        previousLoggedFlights.Add(aircraftsCollidingList[i].CollidingFlightsDto.flightTag1 + " & " + aircraftsCollidingList[i].CollidingFlightsDto.flightTag2);
+
+                    }
                 }
+                
             }
 
             AirTrafficEvent airTrafficEvent = new AirTrafficEvent(newCollisionFlights);
