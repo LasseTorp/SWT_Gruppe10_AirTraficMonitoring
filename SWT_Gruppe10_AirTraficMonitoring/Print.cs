@@ -17,7 +17,15 @@ namespace SWT_Gruppe10_AirTraficMonitoring
         {
             foreach (var aircraftsInAirspace in e.AirTrafficList)
             {
-                if (aircraftsInAirspace.Course != 0 || aircraftsInAirspace.Velocity != 0)
+                if (aircraftsInAirspace.Course == 0 && aircraftsInAirspace.Velocity == 0)
+                {
+                    Console.WriteLine("Time: " + aircraftsInAirspace.TimeStamp + ":" +
+                                      aircraftsInAirspace.TimeStamp.Millisecond + " Aircrafttag: " +
+                                      aircraftsInAirspace.Tag + " Altitude: " + aircraftsInAirspace.Altitude +
+                                      " X-Cor: " + aircraftsInAirspace.XCor + " Y-Cor " + aircraftsInAirspace.YCor +
+                                      " Course: Unknown Velocity: Unknown");
+                }
+                else
                 {
                     Console.WriteLine("Time: " + aircraftsInAirspace.TimeStamp + ":" +
                                       aircraftsInAirspace.TimeStamp.Millisecond + " Aircrafttag: " +
