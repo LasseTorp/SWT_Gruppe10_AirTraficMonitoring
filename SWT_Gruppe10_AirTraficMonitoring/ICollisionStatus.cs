@@ -13,7 +13,5 @@ namespace SWT_Gruppe10_AirTraficMonitoring
         void DetectCollision(List<FlightDataDTO> aircraftList);
 
         event EventHandler<AirTrafficEvent> CollisionStatusEvent; 
-
-        //void ShowData(); 
     }
 }

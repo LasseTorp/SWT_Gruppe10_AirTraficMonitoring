@@ -9,5 +9,6 @@ namespace SWT_Gruppe10_AirTraficMonitoring
     public interface IPrint
     {
         void ConsolePrint(object sender, AirTrafficEvent e);
+        void ConsolePrintCollision(object sender, AirTrafficEvent e);
     }
 }
