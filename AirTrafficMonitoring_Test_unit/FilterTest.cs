@@ -84,5 +84,11 @@ namespace AirTrafficMonitoring_Test_unit
 
         }
 
+        [Test]
+        public void TestestesVois()
+        {
+            Assert.That(event_, Is.Null);
+        }
+
     }
 }
