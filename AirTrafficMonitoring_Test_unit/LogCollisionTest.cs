@@ -53,17 +53,17 @@ namespace AirTrafficMonitoring_Test_unit
 
 
 
-            List<FlightDataDTO> flightDataList3 = new List<FlightDataDTO>();
-            flightDataList3.Add(flightData1);
-            flightDataList3.Add(flightData2);
+            //List<FlightDataDTO> flightDataList3 = new List<FlightDataDTO>();
+            //flightDataList3.Add(flightData1);
+            //flightDataList3.Add(flightData2);
 
-            //fakeCollisionStatus_.CollisionStatusEvent += Raise.EventWith(new AirTrafficEvent(flightDataList2));
-            //airTrafficEvent_ = null;
-            //fakeCollisionStatus_.CollisionStatusEvent += Raise.EventWith(new AirTrafficEvent(flightDataList1));
+            fakeCollisionStatus_.CollisionStatusEvent += Raise.EventWith(new AirTrafficEvent(flightDataList2));
+            airTrafficEvent_ = null;
+            fakeCollisionStatus_.CollisionStatusEvent += Raise.EventWith(new AirTrafficEvent(flightDataList1));
 
-            fakeCollisionStatus_.CollisionStatusEvent += Raise.EventWith(new AirTrafficEvent(flightDataList3));
+            //fakeCollisionStatus_.CollisionStatusEvent += Raise.EventWith(new AirTrafficEvent(flightDataList3));
 
-            Assert.That(airTrafficEvent_.AirTrafficList.Count, Is.EqualTo(1));
+            Assert.That(airTrafficEvent_, Is.Null);
         }
     }
 }
