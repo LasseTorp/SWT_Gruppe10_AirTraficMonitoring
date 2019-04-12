@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SWT_Gruppe10_AirTraficMonitoring
 {
-    class LogCollision : ILogCollision
+    public class LogCollision : ILogCollision
     {
         private List<string> previousLoggedFlights = new List<string>();
         public event EventHandler<AirTrafficEvent> DeterminedLogEvent;
