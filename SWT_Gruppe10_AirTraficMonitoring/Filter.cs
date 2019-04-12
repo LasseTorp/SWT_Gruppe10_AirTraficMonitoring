@@ -7,7 +7,7 @@ using TransponderReceiver;
 
 namespace SWT_Gruppe10_AirTraficMonitoring
 {
-    class Filter : IFilter
+    public class Filter : IFilter
     {
 
         public List<FlightDataDTO> SortedDataTracks;
