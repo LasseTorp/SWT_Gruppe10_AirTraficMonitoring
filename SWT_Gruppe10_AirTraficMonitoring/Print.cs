@@ -23,7 +23,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                                       aircraftsInAirspace.TimeStamp.Millisecond + " Aircrafttag: " +
                                       aircraftsInAirspace.Tag + " Altitude: " + aircraftsInAirspace.Altitude +
                                       " X-Cor: " + aircraftsInAirspace.XCor + " Y-Cor " + aircraftsInAirspace.YCor +
-                                      " Course: Unknown Velocity: Unknown");
+                                      " Course: Unknown Velocity: Unknown\n");
                 }
                 else
                 {
