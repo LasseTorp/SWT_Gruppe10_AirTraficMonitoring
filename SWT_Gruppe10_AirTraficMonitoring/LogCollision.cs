@@ -39,8 +39,12 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                 
             }
 
-            AirTrafficEvent airTrafficEvent = new AirTrafficEvent(newCollisionFlights);
-            DeterminedLogEvent?.Invoke(this, airTrafficEvent);
+            if (newCollisionFlights.Count != 0)
+            {
+                AirTrafficEvent airTrafficEvent = new AirTrafficEvent(newCollisionFlights);
+                DeterminedLogEvent?.Invoke(this, airTrafficEvent);
+            }
+            
         }
     }
 }
