@@ -64,7 +64,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                 //Console.WriteLine(DateTime.ParseExact(inputfields[4], "yyyyMMddHHmmssfff", System.Globalization.CultureInfo.InvariantCulture));
             }
 
-            if (!data.Contains(null))
+            if (data.Count!=0)  //!data.Contains(null))
             {
                 AirTrafficEvent airTrafficEvent = new AirTrafficEvent(data);
                 SortDataEvent?.Invoke(this, airTrafficEvent);
