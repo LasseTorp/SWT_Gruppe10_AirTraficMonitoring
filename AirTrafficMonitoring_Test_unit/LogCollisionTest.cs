@@ -10,6 +10,7 @@ using SWT_Gruppe10_AirTraficMonitoring;
 
 namespace AirTrafficMonitoring_Test_unit
 {
+    //Ny test samt klasse til genaflevering
     class LogCollisionTest
     {
         private AirTrafficEvent airTrafficEvent_;
@@ -28,11 +29,12 @@ namespace AirTrafficMonitoring_Test_unit
             UUT_.DeterminedLogEvent += (e, args) => { airTrafficEvent_ = args; };
         }
 
+        
         [Test]
         public void NewTestReception()
         {
             List<FlightDataDTO> flightDataList = new List<FlightDataDTO>();
-            FlightDataDTO flightData = new FlightDataDTO("ATR423", 39045, 12932, 14000, DateTime.Now, 30, 105, new CollidingFlightsDTO("", "", ""));
+            FlightDataDTO flightData = new FlightDataDTO("ATR423", 39045, 12932, 14000, DateTime.Now, 30, 105, new CollidingFlightsDTO("tag1","tag2","test"));
             flightDataList.Add(flightData);
 
             fakeCollisionStatus_.CollisionStatusEvent += Raise.EventWith(new AirTrafficEvent(flightDataList));
