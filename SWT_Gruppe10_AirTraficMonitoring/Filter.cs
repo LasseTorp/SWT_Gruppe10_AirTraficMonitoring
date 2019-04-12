@@ -7,7 +7,7 @@ using TransponderReceiver;
 
 namespace SWT_Gruppe10_AirTraficMonitoring
 {
-    class Filter : IFilter
+    public class Filter : IFilter
     {
 
         public List<FlightDataDTO> SortedDataTracks;
@@ -38,7 +38,7 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                 }
             }
 
-            if (!FiltratedDataTracks.Contains(null))
+            if (FiltratedDataTracks.Count != 0) //!FiltratedDataTracks.Contains(null))
             {
                 AirTrafficEvent airTrafficEvent = new AirTrafficEvent(FiltratedDataTracks);
                 FiltratedEvent?.Invoke(this, airTrafficEvent);

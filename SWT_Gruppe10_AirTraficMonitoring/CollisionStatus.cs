@@ -10,25 +10,14 @@ namespace SWT_Gruppe10_AirTraficMonitoring
     {
         public bool collisionStatus_ { get; set; }
         private string aircraftsColliding_;
-
         public event EventHandler<AirTrafficEvent> CollisionStatusEvent;
 
-        //private string aircraftInAirspace_;
-        //private List<string> aircraftsInAirspaceList; 
         public List<FlightDataDTO> aircraftList { get; set; }
-        //public List<FlightDataDTO> collidingAircrafts;
-        //public List<CollidingFlightsDTO> CollidingFlightsDTOs; 
-
-        //private ILog log;
-        //private IPrint print; 
 
         public CollisionStatus(IDataCalculator iDataCalculator)
         {
             iDataCalculator.DataCalculatedEvent += RecieveData;
             collisionStatus_ = false; 
-            //log = new Log();
-            //print = new Print();
-
         }
 
         public void RecieveData(object sender, AirTrafficEvent airTrafficEvent)
@@ -40,10 +29,6 @@ namespace SWT_Gruppe10_AirTraficMonitoring
 
         public void DetectCollision(List<FlightDataDTO> aircraftList_)
         {
-            //aircraftsInAirspaceList = new List<string>();
-            //CollidingFlightsDTOs = new List<CollidingFlightsDTO>();
-
-
             for (int i = 0; i < aircraftList_.Count; i++)
             {
                 for (int j = i+1; j < aircraftList_.Count ; j++)
@@ -67,28 +52,12 @@ namespace SWT_Gruppe10_AirTraficMonitoring
                             aircraftList_[i].CollidingFlightsDto = new CollidingFlightsDTO(aircraftList_[i].Tag,
                                 aircraftList_[j].Tag, aircraftsColliding_);
 
-                            //CollidingFlightsDTOs.Add(new CollidingFlightsDTO(aircraftList_[i].Tag, aircraftList_[j].Tag, aircraftsColliding_));
-
-                        }
-                        
-                    }
-                    
+                        }                      
+                    }                   
                 }
-                
-                //aircraftInAirspace_ = "Time: " + aircraftList_[i].TimeStamp + ":" + aircraftList_[i].TimeStamp.Millisecond + " Aircrafttag: " + aircraftList_[i].Tag + " Altitude: " + aircraftList_[i].Altitude + " X-Cor: " + aircraftList_[i].XCor +
-                //                      " Y-Cor: " + aircraftList_[i].YCor + " Course: " + aircraftList_[i].Course + " Velocity: " +
-                //                      aircraftList_[i].Velocity + " m/s \n";
-                //aircraftsInAirspaceList.Add(aircraftInAirspace_);
             }
-            //ShowData();
             AirTrafficEvent airTrafficEvent = new AirTrafficEvent(aircraftList_);
             CollisionStatusEvent?.Invoke(this, airTrafficEvent);
         }
-
-        //public void ShowData()
-        //{
-        //        log.LogCollision(CollidingFlightsDTOs);
-        //        print.PrintAircraftInfo(aircraftsInAirspaceList);
-        //}
     }
 }
