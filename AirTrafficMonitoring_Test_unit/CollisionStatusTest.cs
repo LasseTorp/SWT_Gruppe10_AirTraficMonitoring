@@ -85,7 +85,7 @@ namespace AirTrafficMonitoring_Test_unit
         }
 
 
-        //The following is the work that has been done before handing in the first time and handing it in again 
+        //The following work has been done between the first and the second hand-in of this assignment 
         [Test]
         public void testRecieveFunction()
         {
